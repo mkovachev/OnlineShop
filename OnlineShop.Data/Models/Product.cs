@@ -9,15 +9,15 @@ namespace OnlineShop.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MinLength(DataConstants.ProductTitleMinLength)]
-        [MaxLength(DataConstants.ProductTitleMaxLength)]
+        [MinLength(DataValidations.ProductTitleMinLength)]
+        [MaxLength(DataValidations.ProductTitleMaxLength)]
         public string Title { get; set; }
 
-        [MaxLength(DataConstants.ProductShortDescriptionMaxLength)]
+        [MaxLength(DataValidations.ProductShortDescriptionMaxLength)]
         public string ShortDescription { get; set; }
 
-        [MinLength(DataConstants.ProductDescriptionMinLength)]
-        [MaxLength(DataConstants.ProductDescriptionMaxLength)]
+        [MinLength(DataValidations.ProductDescriptionMinLength)]
+        [MaxLength(DataValidations.ProductDescriptionMaxLength)]
         public string Description { get; set; }
 
         [Range(0, 10000)]
