@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>aspnet-OnlineShop.Web-35216E13-467B-4E75-9210-562C3682C799</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineShop.Controllers\OnlineShop.Controllers.csproj" />
+    <ProjectReference Include="..\OnlineShop.Data\OnlineShop.Data.csproj" />
+  </ItemGroup>
+</Project>
