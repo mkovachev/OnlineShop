@@ -40,21 +40,21 @@ namespace OnlineShop.Web.Infrastructure
 
         public static async Task<IApplicationBuilder> SeedDataAsync(this IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices.CreateScope())
+            using (IServiceScope serviceScope = app.ApplicationServices.CreateScope())
             {
-                var services = serviceScope.ServiceProvider;
-                var dbContext = services.GetService<OnlineShopDbContext>();
+                System.IServiceProvider services = serviceScope.ServiceProvider;
+                OnlineShopDbContext dbContext = services.GetService<OnlineShopDbContext>();
 
                 await dbContext.Database.MigrateAsync();
 
-                var roleManager = services.GetService<RoleManager<IdentityRole>>();
-                var existingRole = await roleManager.FindByNameAsync(ControllerValidations.AdministratorRole);
+                RoleManager<IdentityRole> roleManager = services.GetService<RoleManager<IdentityRole>>();
+                IdentityRole existingRole = await roleManager.FindByNameAsync(ControllerValidations.AdministratorRole);
                 if (existingRole != null)
                 {
                     return app;
                 }
 
-                var adminRole = new IdentityRole(ControllerValidations.AdministratorRole);
+                IdentityRole adminRole = new IdentityRole(ControllerValidations.AdministratorRole);
 
                 await roleManager.CreateAsync(adminRole);
 
