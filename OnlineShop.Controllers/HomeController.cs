@@ -1,5 +1,5 @@
-﻿using OnlineShop.Controllers.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Controllers.Models;
 using System.Diagnostics;
 
 namespace OnlineShop.Controllers

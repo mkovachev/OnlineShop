@@ -31,6 +31,5 @@ namespace OnlineShop.Web.Infrastructure
                             pattern: "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
-
     }
 }
