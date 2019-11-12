@@ -20,7 +20,7 @@ namespace OnlineShop.Data.Models
 
         [MinLength(DataValidations.ProductDescriptionMinLength)]
         [MaxLength(DataValidations.ProductDescriptionMaxLength)]
-        public string Description { get; set; }
+        public string LongDescription { get; set; }
 
         [Range(0, 10000)]
         [DataType(DataType.Currency)]
@@ -36,6 +36,10 @@ namespace OnlineShop.Data.Models
         public string CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public string OrderDetailId { get; set; }
+
+        public virtual OrderDetail OrderDetail { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
