@@ -9,7 +9,12 @@ namespace OnlineShop.Data.Models
     {
         public Guid Id { get; set; }
 
+        public string UserId { get; set; }
+
+        public User User { get; set; }
+
         public ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+
         public ICollection<ShippingDetail> ShippingDetails { get; set; } = new List<ShippingDetail>();
     }
 }

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using OnlineShop.Data.Contracts;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Data.Models
 {
-    public class ShippingDetail
+    public class ShippingDetail : IAuditable, IDeletable
     {
         public Guid Id { get; set; }
         public User Recipient { get; set; }
@@ -49,5 +50,13 @@ namespace OnlineShop.Data.Models
         public string OrderId { get; set; }
 
         public virtual Order Order { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
