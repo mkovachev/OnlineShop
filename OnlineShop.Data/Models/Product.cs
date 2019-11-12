@@ -35,7 +35,7 @@ namespace OnlineShop.Data.Models
 
         public ICollection<Image> Images { get; set; } = new List<Image>();
 
-        public int CategoryId { get; set; }
+        public string CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
     }

@@ -15,6 +15,7 @@ namespace Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<ShippingDetail> ShippingDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -22,6 +23,7 @@ namespace Data
             builder.Entity<Category>().ToTable("Categories");
             builder.Entity<Order>().ToTable("Orders");
             builder.Entity<OrderDetail>().ToTable("OrderDetails");
+            builder.Entity<ShippingDetail>().ToTable("ShippingDetails");
 
             base.OnModelCreating(builder);
         }

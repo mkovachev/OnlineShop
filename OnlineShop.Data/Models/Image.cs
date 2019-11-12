@@ -17,7 +17,7 @@ namespace OnlineShop.Data.Models
         [MaxLength(4)]
         public string FileExtension { get; set; }
 
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         public virtual Product Product { get; set; }
     }
