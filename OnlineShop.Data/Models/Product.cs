@@ -6,7 +6,7 @@ namespace OnlineShop.Data.Models
 {
     public class Product
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [MinLength(DataValidations.ProductTitleMinLength)]
@@ -34,8 +34,6 @@ namespace OnlineShop.Data.Models
         public DateTime DateCreated { get; set; }
 
         public ICollection<Image> Images { get; set; } = new List<Image>();
-
-        public ICollection<ProductAttribute> ProductAttributes { get; set; } = new List<ProductAttribute>();
 
         public int CategoryId { get; set; }
 
