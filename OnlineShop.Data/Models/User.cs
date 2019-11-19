@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using OnlineShop.Data.Contracts;
+using System;
+using System.Collections.Generic;
 
 namespace OnlineShop.Data.Models
 {
