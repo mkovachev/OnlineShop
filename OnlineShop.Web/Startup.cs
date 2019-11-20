@@ -21,9 +21,19 @@ namespace OnlineShop.Web
                 options.UseSqlServer(
                     Configuration.GetDefaultConnectionString()));
 
-            services.AddDefaultIdentity<IdentityUser>(options =>
-                options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<OnlineShopDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(options 
+                => options.SignIn.RequireConfirmedAccount = true)
+                   .AddEntityFrameworkStores<OnlineShopDbContext>();
+
+            services
+               .Configure<IdentityOptions>(options =>
+               {
+                   options.Password.RequireDigit = false;
+                   options.Password.RequiredLength = 5;
+                   options.Password.RequireLowercase = false;
+                   options.Password.RequireNonAlphanumeric = false;
+                   options.Password.RequireUppercase = false;
+               });
 
             services.AddControllersWithViews();
             services.AddRazorPages();

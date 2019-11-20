@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.Controllers;
+using OnlineShop.Data.Models;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Web.Infrastructure
@@ -49,6 +50,7 @@ namespace OnlineShop.Web.Infrastructure
 
                 RoleManager<IdentityRole> roleManager = services.GetService<RoleManager<IdentityRole>>();
                 IdentityRole existingRole = await roleManager.FindByNameAsync(ControllerValidations.AdministratorRole);
+
                 if (existingRole != null)
                 {
                     return app;
@@ -58,28 +60,27 @@ namespace OnlineShop.Web.Infrastructure
 
                 await roleManager.CreateAsync(adminRole);
 
-                // create user
-                //var adminUser = new User
-                //{
-                //    UserName = "admin@onlineshop.com",
-                //    Email = "admin@onlineshop.com",
-                //    SecurityStamp = "AdminsecurityStamp"
-                //};
+                var admin = new User
+                {
+                    UserName = "admin",
+                    Email = "admin@onlineshop.com",
+                    //SecurityStamp = "AdminsecurityStamp"
+                };
 
-                //var userManager = services.GetService<UserManager<User>>();
+                var userManager = services.GetService<UserManager<User>>();
 
-                //await userManager.CreateAsync(adminUser, "adminpass");
+                await userManager.CreateAsync(admin, "adminpass");
 
-                //await userManager.AddToRoleAsync(adminUser, ControllerValidations.AdministratorRole);
+                await userManager.AddToRoleAsync(admin, ControllerValidations.AdministratorRole);
 
-                //var user = new User
-                //{
-                //    UserName = "normal@onlineshop.com",
-                //    Email = "normal@onlineshop.com",
-                //    SecurityStamp = "UserSecurityStamp"
-                //};
+                var user = new User
+                {
+                    UserName = "user",
+                    Email = "user@onlineshop.com",
+                    //SecurityStamp = "UserSecurityStamp"
+                };
 
-                //await userManager.CreateAsync(user, "userpass");
+                await userManager.CreateAsync(user, "userpass");
 
                 await dbContext.SaveChangesAsync();
             }
