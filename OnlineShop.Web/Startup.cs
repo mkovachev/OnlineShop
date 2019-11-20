@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineShop.Data.Models;
 using OnlineShop.Web.Infrastructure;
-using System;
 
 namespace OnlineShop.Web
 {
@@ -35,6 +33,8 @@ namespace OnlineShop.Web
                    options.Password.RequireNonAlphanumeric = false;
                    options.Password.RequireUppercase = false;
                });
+
+            services.AddServices(); // reg all from service layer 
 
             services.AddControllersWithViews();
             services.AddRazorPages();
