@@ -7,7 +7,7 @@ namespace OnlineShop.Data.Models
 {
     public class OrderDetail : IAuditable, IDeletable
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Range(0, 10000)]
         [DataType(DataType.Currency)]
@@ -25,8 +25,8 @@ namespace OnlineShop.Data.Models
 
         public ICollection<Product> Products = new List<Product>();
 
-        public string OrderId { get; set; }
+        public int OrderId { get; set; }
 
-        public virtual Order Order { get; set; }
+        public Order Order { get; set; }
     }
 }

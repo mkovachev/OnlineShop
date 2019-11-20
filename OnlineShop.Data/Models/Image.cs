@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Data.Models
 {
     public class Image
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -17,8 +16,8 @@ namespace OnlineShop.Data.Models
         [MaxLength(4)]
         public string FileExtension { get; set; }
 
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
 
-        public virtual Product Product { get; set; }
+        public Product Product { get; set; }
     }
 }

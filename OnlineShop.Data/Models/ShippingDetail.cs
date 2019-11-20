@@ -6,7 +6,7 @@ namespace OnlineShop.Data.Models
 {
     public class ShippingDetail : IAuditable, IDeletable
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public User Recipient { get; set; }
 
         [Required]
@@ -55,8 +55,8 @@ namespace OnlineShop.Data.Models
 
         public bool IsDeleted { get; set; }
 
-        public string OrderId { get; set; }
+        public int OrderId { get; set; }
 
-        public virtual Order Order { get; set; }
+        public Order Order { get; set; }
     }
 }

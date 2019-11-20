@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineShop.Data.Migrations
 {
-    public partial class initDbModels : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,7 +53,8 @@ namespace OnlineShop.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -171,7 +172,8 @@ namespace OnlineShop.Data.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -189,32 +191,33 @@ namespace OnlineShop.Data.Migrations
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     OrderTotal = table.Column<decimal>(nullable: false),
                     OrderPlaced = table.Column<DateTime>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    OrderId = table.Column<string>(nullable: true),
-                    OrderId1 = table.Column<Guid>(nullable: true)
+                    OrderId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_OrderId1",
-                        column: x => x.OrderId1,
+                        name: "FK_OrderDetails_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ShippingDetails",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RecipientId = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
@@ -229,18 +232,17 @@ namespace OnlineShop.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    OrderId = table.Column<string>(nullable: true),
-                    OrderId1 = table.Column<Guid>(nullable: true)
+                    OrderId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShippingDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShippingDetails_Orders_OrderId1",
-                        column: x => x.OrderId1,
+                        name: "FK_ShippingDetails_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ShippingDetails_AspNetUsers_RecipientId",
                         column: x => x.RecipientId,
@@ -253,7 +255,8 @@ namespace OnlineShop.Data.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(maxLength: 100, nullable: false),
                     ShortDescription = table.Column<string>(maxLength: 50, nullable: true),
                     LongDescription = table.Column<string>(maxLength: 3000, nullable: true),
@@ -263,48 +266,46 @@ namespace OnlineShop.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    CategoryId = table.Column<string>(nullable: true),
-                    CategoryId1 = table.Column<Guid>(nullable: true),
-                    OrderDetailId = table.Column<string>(nullable: true),
-                    OrderDetailId1 = table.Column<Guid>(nullable: true)
+                    CategoryId = table.Column<int>(nullable: false),
+                    OrderDetailId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId1",
-                        column: x => x.CategoryId1,
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_OrderDetails_OrderDetailId1",
-                        column: x => x.OrderDetailId1,
+                        name: "FK_Products_OrderDetails_OrderDetailId",
+                        column: x => x.OrderDetailId,
                         principalTable: "OrderDetails",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Image",
+                name: "Images",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(nullable: false),
                     FileExtension = table.Column<string>(maxLength: 4, nullable: false),
-                    ProductId = table.Column<string>(nullable: true),
-                    ProductId1 = table.Column<Guid>(nullable: true)
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Image", x => x.Id);
+                    table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Image_Products_ProductId1",
-                        column: x => x.ProductId1,
+                        name: "FK_Images_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -347,14 +348,14 @@ namespace OnlineShop.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_ProductId1",
-                table: "Image",
-                column: "ProductId1");
+                name: "IX_Images_ProductId",
+                table: "Images",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OrderId1",
+                name: "IX_OrderDetails_OrderId",
                 table: "OrderDetails",
-                column: "OrderId1");
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
@@ -362,19 +363,19 @@ namespace OnlineShop.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId1",
+                name: "IX_Products_CategoryId",
                 table: "Products",
-                column: "CategoryId1");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_OrderDetailId1",
+                name: "IX_Products_OrderDetailId",
                 table: "Products",
-                column: "OrderDetailId1");
+                column: "OrderDetailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShippingDetails_OrderId1",
+                name: "IX_ShippingDetails_OrderId",
                 table: "ShippingDetails",
-                column: "OrderId1");
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShippingDetails_RecipientId",
@@ -400,7 +401,7 @@ namespace OnlineShop.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Image");
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "ShippingDetails");

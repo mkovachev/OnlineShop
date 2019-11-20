@@ -5,7 +5,7 @@ namespace OnlineShop.Data.Models
 {
     public class Order
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 

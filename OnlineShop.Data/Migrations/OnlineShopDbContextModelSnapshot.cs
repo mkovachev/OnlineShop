@@ -227,9 +227,10 @@ namespace OnlineShop.Data.Migrations
 
             modelBuilder.Entity("OnlineShop.Data.Models.Category", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -243,9 +244,10 @@ namespace OnlineShop.Data.Migrations
 
             modelBuilder.Entity("OnlineShop.Data.Models.Image", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FileExtension")
                         .IsRequired()
@@ -259,24 +261,22 @@ namespace OnlineShop.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ProductId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId1");
+                    b.HasIndex("ProductId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("OnlineShop.Data.Models.Order", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -290,9 +290,10 @@ namespace OnlineShop.Data.Migrations
 
             modelBuilder.Entity("OnlineShop.Data.Models.OrderDetail", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -306,11 +307,8 @@ namespace OnlineShop.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("OrderId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderPlaced")
                         .HasColumnType("datetime2");
@@ -320,22 +318,20 @@ namespace OnlineShop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("OnlineShop.Data.Models.Product", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("CategoryId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -353,11 +349,8 @@ namespace OnlineShop.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OrderDetailId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("OrderDetailId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("OrderDetailId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -377,18 +370,19 @@ namespace OnlineShop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrderDetailId1");
+                    b.HasIndex("OrderDetailId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("OnlineShop.Data.Models.ShippingDetail", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -430,11 +424,8 @@ namespace OnlineShop.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("OrderId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(25)")
@@ -455,7 +446,7 @@ namespace OnlineShop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("RecipientId");
 
@@ -530,7 +521,9 @@ namespace OnlineShop.Data.Migrations
                 {
                     b.HasOne("OnlineShop.Data.Models.Product", "Product")
                         .WithMany("Images")
-                        .HasForeignKey("ProductId1");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineShop.Data.Models.Order", b =>
@@ -544,25 +537,33 @@ namespace OnlineShop.Data.Migrations
                 {
                     b.HasOne("OnlineShop.Data.Models.Order", "Order")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId1");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineShop.Data.Models.Product", b =>
                 {
                     b.HasOne("OnlineShop.Data.Models.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId1");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OnlineShop.Data.Models.OrderDetail", "OrderDetail")
                         .WithMany()
-                        .HasForeignKey("OrderDetailId1");
+                        .HasForeignKey("OrderDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineShop.Data.Models.ShippingDetail", b =>
                 {
                     b.HasOne("OnlineShop.Data.Models.Order", "Order")
                         .WithMany("ShippingDetails")
-                        .HasForeignKey("OrderId1");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OnlineShop.Data.Models.User", "Recipient")
                         .WithMany()

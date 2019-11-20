@@ -8,7 +8,7 @@ namespace OnlineShop.Data.Models
     public class Product : IAuditable, IDeletable
 
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MinLength(DataValidations.ProductTitleMinLength)]
@@ -41,12 +41,12 @@ namespace OnlineShop.Data.Models
 
         public ICollection<Image> Images { get; set; } = new List<Image>();
 
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
-        public virtual Category Category { get; set; }
+        public Category Category { get; set; }
 
-        public string OrderDetailId { get; set; }
+        public int OrderDetailId { get; set; }
 
-        public virtual OrderDetail OrderDetail { get; set; }
+        public OrderDetail OrderDetail { get; set; }
     }
 }
