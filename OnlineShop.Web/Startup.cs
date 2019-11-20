@@ -1,3 +1,4 @@
+using AutoMapper;
 using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,7 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineShop.Data.Models;
+using OnlineShop.Controllers.Implementations;
+using OnlineShop.Services.Interfaces;
 using OnlineShop.Web.Infrastructure;
 
 namespace OnlineShop.Web
@@ -28,9 +30,9 @@ namespace OnlineShop.Web
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<OnlineShopDbContext>();
 
-            //services.AddDefaultIdentity<IdentityUser>(options 
-            //    => options.SignIn.RequireConfirmedAccount = true)
-            //       .AddEntityFrameworkStores<OnlineShopDbContext>();
+            services.AddAutoMapper(
+                typeof(IService).Assembly,
+                typeof(HomeController).Assembly);
 
             services
                .Configure<IdentityOptions>(options =>
