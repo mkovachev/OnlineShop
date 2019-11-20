@@ -53,7 +53,7 @@ namespace OnlineShop.Web
 
             app.UseEndpoints();
 
-            app.SeedData();
+            //app.SeedData();
         }
     }
 }

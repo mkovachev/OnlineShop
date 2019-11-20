@@ -13,6 +13,7 @@ namespace OnlineShop.Web.Infrastructure
 {
     public static class ApplicationBuilderExtensions
     {
+        //public static IApplicationBuilder SeedData(this IApplicationBuilder app) => app.SeedDataAsync().GetAwaiter().GetResult();
         public static IApplicationBuilder UseExceptionHandling(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -39,14 +40,13 @@ namespace OnlineShop.Web.Infrastructure
                         endpoints.MapRazorPages();
                     });
 
-        public static IApplicationBuilder SeedData(this IApplicationBuilder app)
-            => app.SeedDataAsync().GetAwaiter().GetResult();
         public static async Task<IApplicationBuilder> SeedDataAsync(this IApplicationBuilder app)
         {
             using (IServiceScope serviceScope = app.ApplicationServices.CreateScope())
             {
                 var services = serviceScope.ServiceProvider;
-                OnlineShopDbContext dbContext = services.GetService<OnlineShopDbContext>();
+
+                var dbContext = services.GetService<OnlineShopDbContext>();
 
                 await dbContext.Database.MigrateAsync();
 
