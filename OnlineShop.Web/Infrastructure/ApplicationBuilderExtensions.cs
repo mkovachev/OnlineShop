@@ -31,24 +31,28 @@ namespace OnlineShop.Web.Infrastructure
         }
 
         public static IApplicationBuilder UseEndpoints(this IApplicationBuilder app)
-                => app.UseEndpoints(endpoints =>
-                    {
-                        endpoints.MapControllerRoute(
-                            name: "default",
-                            pattern: "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapRazorPages();
-                    });
+               => app.UseEndpoints(routes =>
+               {
+                   routes.MapControllerRoute(
+                       name: "default",
+                       pattern: "{controller=Home}/{action=Index}/{id?}");
+                   routes.MapRazorPages();
 
-        // public static IApplicationBuilder SeedData(this IApplicationBuilder app) => app.SeedDataAsync().GetAwaiter().GetResult();
+                   routes.MapControllerRoute(
+                      name: "areas",
+                       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                   routes.MapRazorPages();
+               });
+
         public static async Task<IApplicationBuilder> SeedDataAsync(this IApplicationBuilder app)
         {
             using (IServiceScope serviceScope = app.ApplicationServices.CreateScope())
             {
                 var services = serviceScope.ServiceProvider;
 
-                var dbContext = services.GetService<OnlineShopDbContext>();
+                var db = services.GetService<OnlineShopDbContext>();
 
-                await dbContext.Database.MigrateAsync();
+                //await db.Database.MigrateAsync();
 
                 var roleManager = services.GetService<RoleManager<IdentityRole>>();
                 var existingRole = await roleManager.FindByNameAsync(ControllerValidations.AdministratorRole);
@@ -82,10 +86,11 @@ namespace OnlineShop.Web.Infrastructure
 
                 await userManager.CreateAsync(user, "userpass");
 
-                await dbContext.SaveChangesAsync();
+                await db.SaveChangesAsync();
             }
 
             return app;
         }
+        public static IApplicationBuilder SeedData(this IApplicationBuilder app) => app.SeedDataAsync().GetAwaiter().GetResult();
     }
 }

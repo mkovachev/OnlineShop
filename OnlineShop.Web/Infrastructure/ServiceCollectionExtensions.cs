@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OnlineShop.Services.Interfaces;
 using System.Linq;
 using System.Reflection;
 

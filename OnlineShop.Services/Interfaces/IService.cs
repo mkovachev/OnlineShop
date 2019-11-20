@@ -1,6 +1,6 @@
 ﻿namespace OnlineShop.Services.Interfaces
 {
-    internal interface IService
+    public interface IService
     {
     }
 }

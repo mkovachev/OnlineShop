@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineShop.Data.Models;
 using OnlineShop.Web.Infrastructure;
 
 namespace OnlineShop.Web
@@ -20,9 +21,16 @@ namespace OnlineShop.Web
             services.AddDbContext<OnlineShopDbContext>(options 
                 => options.UseSqlServer(Configuration.GetDefaultConnectionString()));
 
-            services.AddDefaultIdentity<IdentityUser>(options 
-                => options.SignIn.RequireConfirmedAccount = true)
-                   .AddEntityFrameworkStores<OnlineShopDbContext>();
+
+            services
+                .AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<OnlineShopDbContext>();
+
+            //services.AddDefaultIdentity<IdentityUser>(options 
+            //    => options.SignIn.RequireConfirmedAccount = true)
+            //       .AddEntityFrameworkStores<OnlineShopDbContext>();
 
             services
                .Configure<IdentityOptions>(options =>
@@ -46,6 +54,7 @@ namespace OnlineShop.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
@@ -54,7 +63,7 @@ namespace OnlineShop.Web
 
             app.UseEndpoints();
 
-            //app.SeedData();
+            app.SeedData();
         }
     }
 }
