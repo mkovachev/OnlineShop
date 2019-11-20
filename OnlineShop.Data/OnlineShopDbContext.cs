@@ -34,15 +34,20 @@ namespace Data
             //    .HasForeignKey(od => od.OrderId);
 
             //builder.Entity<ShippingDetail>()
-            // .HasOne(od => od.Order)
+            // .HasOne(sd => sd.Order)
             // .WithMany(o => o.ShippingDetails)
-            // .HasForeignKey(od => od.OrderId);
+            // .HasForeignKey(sd => sd.OrderId);
 
             //builder
             //    .Entity<Order>()
-            //    .HasOne(a => a.User)
+            //    .HasOne(o => o.User)
             //    .WithMany(u => u.Orders)
-            //    .HasForeignKey(a => a.UserId);
+            //    .HasForeignKey(o => o.UserId);
+
+            //builder.Entity<Image>()
+            //    .HasOne(i => i.Product)
+            //    .WithMany(p => p.Images)
+            //    .HasForeignKey(i => i.Product);
 
             base.OnModelCreating(builder);
         }
