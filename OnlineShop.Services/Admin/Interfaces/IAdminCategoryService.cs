@@ -10,7 +10,7 @@ namespace OnlineShop.Services.Admin.Interfaces
 
         Task<IEnumerable<AdminCategoryServiceModel>> AllAsync();
 
-        Task CreateAsync(string name);
+        Task<int> CreateAsync(string name);
 
         Task EditAsync(int id, string name);
 
