@@ -45,7 +45,7 @@ namespace OnlineShop.Web.Infrastructure
         {
             using (IServiceScope serviceScope = app.ApplicationServices.CreateScope())
             {
-                System.IServiceProvider services = serviceScope.ServiceProvider;
+                var services = serviceScope.ServiceProvider;
                 OnlineShopDbContext dbContext = services.GetService<OnlineShopDbContext>();
 
                 await dbContext.Database.MigrateAsync();
