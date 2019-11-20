@@ -11,15 +11,9 @@ namespace OnlineShop.Data.Repository
     {
         private readonly OnlineShopDbContext context;
 
-        public Repository(OnlineShopDbContext context)
-        {
-            this.context = context;
-        }
+        public Repository(OnlineShopDbContext context) => this.context = context;
 
-        public IQueryable<T> All()
-        {
-            return context.Set<T>();
-        }
+        public IQueryable<T> All() => context.Set<T>();
 
         public async Task AddAsync(T entity)
         {
@@ -46,10 +40,7 @@ namespace OnlineShop.Data.Repository
             entry.State = EntityState.Modified;
         }
 
-        public async Task SaveAsync()
-        {
-            await context.SaveChangesAsync();
-        }
+        public async Task SaveAsync() => await context.SaveChangesAsync();
 
         void IRepository<T>.Add(T entity)
         {
@@ -65,9 +56,6 @@ namespace OnlineShop.Data.Repository
             }
         }
 
-        void IRepository<T>.Save()
-        {
-            context.SaveChanges();
-        }
+        void IRepository<T>.Save() => context.SaveChanges();
     }
 }

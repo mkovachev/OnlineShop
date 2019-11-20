@@ -47,10 +47,6 @@ namespace OnlineShop.Data.Models
 
         public DateTime? EstimatedDeliveryDate { get; set; }
 
-        public string OrderId { get; set; }
-
-        public virtual Order Order { get; set; }
-
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
@@ -58,5 +54,9 @@ namespace OnlineShop.Data.Models
         public DateTime? DeletedOn { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public string OrderId { get; set; }
+
+        public virtual Order Order { get; set; }
     }
 }

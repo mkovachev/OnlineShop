@@ -31,6 +31,14 @@ namespace OnlineShop.Data.Models
         [DataType(DataType.ImageUrl)]
         public string Thumbnail { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
         public ICollection<Image> Images { get; set; } = new List<Image>();
 
         public string CategoryId { get; set; }
@@ -40,13 +48,5 @@ namespace OnlineShop.Data.Models
         public string OrderDetailId { get; set; }
 
         public virtual OrderDetail OrderDetail { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
-
-        public bool IsDeleted { get; set; }
     }
 }
