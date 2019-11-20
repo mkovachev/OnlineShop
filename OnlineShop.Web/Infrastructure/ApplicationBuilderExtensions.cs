@@ -39,6 +39,8 @@ namespace OnlineShop.Web.Infrastructure
                         endpoints.MapRazorPages();
                     });
 
+        public static IApplicationBuilder SeedData(this IApplicationBuilder app)
+            => app.SeedDataAsync().GetAwaiter().GetResult();
         public static async Task<IApplicationBuilder> SeedDataAsync(this IApplicationBuilder app)
         {
             using (IServiceScope serviceScope = app.ApplicationServices.CreateScope())
@@ -48,15 +50,15 @@ namespace OnlineShop.Web.Infrastructure
 
                 await dbContext.Database.MigrateAsync();
 
-                RoleManager<IdentityRole> roleManager = services.GetService<RoleManager<IdentityRole>>();
-                IdentityRole existingRole = await roleManager.FindByNameAsync(ControllerValidations.AdministratorRole);
+                var roleManager = services.GetService<RoleManager<IdentityRole>>();
+                var existingRole = await roleManager.FindByNameAsync(ControllerValidations.AdministratorRole);
 
                 if (existingRole != null)
                 {
                     return app;
                 }
 
-                IdentityRole adminRole = new IdentityRole(ControllerValidations.AdministratorRole);
+                var adminRole = new IdentityRole(ControllerValidations.AdministratorRole);
 
                 await roleManager.CreateAsync(adminRole);
 
@@ -64,7 +66,6 @@ namespace OnlineShop.Web.Infrastructure
                 {
                     UserName = "admin",
                     Email = "admin@onlineshop.com",
-                    //SecurityStamp = "AdminsecurityStamp"
                 };
 
                 var userManager = services.GetService<UserManager<User>>();
@@ -77,7 +78,6 @@ namespace OnlineShop.Web.Infrastructure
                 {
                     UserName = "user",
                     Email = "user@onlineshop.com",
-                    //SecurityStamp = "UserSecurityStamp"
                 };
 
                 await userManager.CreateAsync(user, "userpass");

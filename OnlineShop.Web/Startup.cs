@@ -5,21 +5,21 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineShop.Data.Models;
 using OnlineShop.Web.Infrastructure;
 
 namespace OnlineShop.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) => Configuration = configuration;
+        public Startup(IConfiguration configuration) => this.Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<OnlineShopDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetDefaultConnectionString()));
+            services.AddDbContext<OnlineShopDbContext>(options 
+                => options.UseSqlServer(Configuration.GetDefaultConnectionString()));
 
             services.AddDefaultIdentity<IdentityUser>(options 
                 => options.SignIn.RequireConfirmedAccount = true)
@@ -29,7 +29,7 @@ namespace OnlineShop.Web
                .Configure<IdentityOptions>(options =>
                {
                    options.Password.RequireDigit = false;
-                   options.Password.RequiredLength = 5;
+                   options.Password.RequiredLength = 6;
                    options.Password.RequireLowercase = false;
                    options.Password.RequireNonAlphanumeric = false;
                    options.Password.RequireUppercase = false;
@@ -52,6 +52,8 @@ namespace OnlineShop.Web
             app.UseAuthorization();
 
             app.UseEndpoints();
+
+            app.SeedData();
         }
     }
 }
