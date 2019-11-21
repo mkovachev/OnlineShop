@@ -9,8 +9,8 @@ namespace OnlineShop.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MinLength(DataValidations.CategoryNameMinLength)]
-        [MaxLength(DataValidations.CategoryNameMaxLength)]
+        [MinLength(DataConstants.CategoryNameMinLength)]
+        [MaxLength(DataConstants.CategoryNameMaxLength)]
         public string Name { get; set; }
 
         public ICollection<Product> Products { get; set; } = new List<Product>();

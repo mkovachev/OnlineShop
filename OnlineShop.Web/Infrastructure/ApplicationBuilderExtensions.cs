@@ -54,14 +54,14 @@ namespace OnlineShop.Web.Infrastructure
                 //await db.Database.MigrateAsync();
 
                 var roleManager = services.GetService<RoleManager<IdentityRole>>();
-                var existingRole = await roleManager.FindByNameAsync(ControllerValidations.AdministratorRole);
+                var existingRole = await roleManager.FindByNameAsync(WebConstants.AdministratorRole);
 
                 if (existingRole != null)
                 {
                     return app;
                 }
 
-                var adminRole = new IdentityRole(ControllerValidations.AdministratorRole);
+                var adminRole = new IdentityRole(WebConstants.AdministratorRole);
 
                 await roleManager.CreateAsync(adminRole);
 
@@ -75,7 +75,7 @@ namespace OnlineShop.Web.Infrastructure
 
                 await userManager.CreateAsync(admin, "adminpass");
 
-                await userManager.AddToRoleAsync(admin, ControllerValidations.AdministratorRole);
+                await userManager.AddToRoleAsync(admin, WebConstants.AdministratorRole);
 
                 var user = new User
                 {

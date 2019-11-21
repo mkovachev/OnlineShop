@@ -1,6 +1,6 @@
 ﻿namespace OnlineShop.Data
 {
-    public class DataValidations
+    public class DataConstants
     {
         public const int ProductTitleMinLength = 3;
         public const int ProductTitleMaxLength = 100;
