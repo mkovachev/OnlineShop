@@ -3,7 +3,7 @@ using OnlineShop.Services.Interfaces;
 using System.Linq;
 using System.Reflection;
 
-namespace OnlineShop.Web.Infrastructure
+namespace OnlineShop.Services.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {

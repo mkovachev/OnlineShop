@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Data;
@@ -15,10 +16,12 @@ namespace OnlineShop.Services.Implementations
     public class ProductService : IProductService
     {
         private readonly OnlineShopDbContext db;
+        private readonly IMapper mapper;
 
-        public ProductService(OnlineShopDbContext db)
+        public ProductService(OnlineShopDbContext db, IMapper mapper)
         {
             this.db = db ?? throw new ArgumentNullException(nameof(db));
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<IEnumerable<ProductListingServiceModel>> AllAsync(int page = 1, int pageSize = DataConstants.PageSize)
@@ -28,7 +31,7 @@ namespace OnlineShop.Services.Implementations
                         .OrderByDescending(p => p.CreatedOn)
                         .Skip((page - 1) * pageSize)
                         .Take(pageSize)
-                        .ProjectTo<ProductListingServiceModel>(null)
+                        .ProjectTo<ProductListingServiceModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
         }
 
@@ -42,7 +45,7 @@ namespace OnlineShop.Services.Implementations
                         .Products
                         .OrderByDescending(p => p.CreatedOn)
                         .Where(p => p.Title.ToLower().Contains(search.ToLower()))
-                        .ProjectTo<ProductListingServiceModel>(null)
+                        .ProjectTo<ProductListingServiceModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
         }
         public int TotalPages() => this.db.Products.Count();

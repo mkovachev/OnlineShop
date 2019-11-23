@@ -6,7 +6,7 @@ namespace OnlineShop.Controllers.Infrastructure
     {
         public ControllerMappingProfile()
         {
-            CreateMap<AdminCategoryDetailsServiceModel, CategoryFormModel>();
+
         }
     }
 }

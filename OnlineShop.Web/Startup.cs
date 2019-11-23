@@ -3,11 +3,12 @@ using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Controllers.Implementations;
-using OnlineShop.Services.Implementations;
+using OnlineShop.Services.Infrastructure;
 using OnlineShop.Services.Interfaces;
 using OnlineShop.Services.Models.ShoppingCartService;
 using OnlineShop.Web.Infrastructure;
@@ -24,6 +25,9 @@ namespace OnlineShop.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+
             services.AddDbContext<OnlineShopDbContext>(options
                 => options.UseSqlServer(Configuration.GetDefaultConnectionString()));
 
@@ -47,19 +51,27 @@ namespace OnlineShop.Web
                    options.Password.RequireUppercase = false;
                });
 
-            services.AddServices(); // auto reg services from service layer
+            services.AddServices(); // auto reg all services
 
             // add Shopping cart
             services.AddSingleton(sp => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
 
             // add email services
             //services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
-            services.AddTransient<IEmailService, EmailService>();
+            //services.AddTransient<IEmailService, EmailService>();
+
+            services
+                .AddMvc(options => options
+                    .AddAutoValidateAntiforgeryToken())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddRouting(routing => { routing.LowercaseUrls = true; }); // routing lowercase
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            //services.AddSession(options =>  // session
+            //{
+            //    options.IdleTimeout = TimeSpan.FromSeconds(30);
+            //});
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

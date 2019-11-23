@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using OnlineShop.Data.Models;
 using OnlineShop.Services.Admin.Models;
+using OnlineShop.Services.Models;
+using OnlineShop.Services.Models.ProductService;
+using OnlineShop.Services.Models.ShoppingCartService;
 
 namespace OnlineShop.Services.Infrastructure
 {
@@ -8,12 +11,21 @@ namespace OnlineShop.Services.Infrastructure
     {
         public ServiceMappingProfile()
         {
+            // Admin area
             CreateMap<Category, AdminCategoryServiceModel>();
-            //.ForMember(a => a.Name, opt => opt.MapFrom(a => a.Name));
+            CreateMap<Product, AdminProductServiceModel>();
+            CreateMap<User, AdminUserServiceModel>();
 
-            CreateMap<Category, AdminUserServiceModel>();
+
+            CreateMap<Product, ProductDetailsServiceModel>();
+            CreateMap<Product, ProductListingServiceModel>();
+
+           // CreateMap<ShoppingCart, ShoppingCart>();
+            CreateMap<ShoppingCart, ShoppingCartItem>();
+            CreateMap<ShoppingCart, ShoppingCartServiceModel>();
 
 
+            //CreateMap<DateTimeProvider, DateTimeProvider>();
 
         }
     }
