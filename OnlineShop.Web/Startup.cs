@@ -27,7 +27,6 @@ namespace OnlineShop.Web
             services.AddDbContext<OnlineShopDbContext>(options
                 => options.UseSqlServer(Configuration.GetDefaultConnectionString()));
 
-
             services
                 .AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
