@@ -6,6 +6,6 @@ namespace OnlineShop.Services.Models.ShoppingCartService
     {
         public string Id { get; set; }
 
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public ICollection<ShoppingCartItem> ShoppingCartItems { get; set; } = new List<ShoppingCartItem>();
     }
 }

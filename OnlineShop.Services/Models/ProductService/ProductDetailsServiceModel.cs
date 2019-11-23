@@ -13,7 +13,7 @@ namespace OnlineShop.Services.Models.ProductService
         public decimal Price { get; set; }
 
         [DataType(DataType.ImageUrl)]
-        public List<Image> Images { get; set; }
+        public ICollection<Image> Images { get; set; } = new List<Image>();
 
         public int CategoryId { get; set; }
 

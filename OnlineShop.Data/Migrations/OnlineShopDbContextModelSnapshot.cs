@@ -261,6 +261,12 @@ namespace OnlineShop.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FileExtension")
                         .IsRequired()
                         .HasColumnType("nvarchar(4)")
@@ -269,6 +275,12 @@ namespace OnlineShop.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -290,6 +302,18 @@ namespace OnlineShop.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -302,10 +326,8 @@ namespace OnlineShop.Data.Migrations
 
             modelBuilder.Entity("OnlineShop.Data.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -326,6 +348,9 @@ namespace OnlineShop.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("OrderTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -364,6 +389,9 @@ namespace OnlineShop.Data.Migrations
                     b.Property<int>("OrderDetailId")
                         .HasColumnType("int");
 
+                    b.Property<string>("OrderDetailId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -384,7 +412,7 @@ namespace OnlineShop.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrderDetailId");
+                    b.HasIndex("OrderDetailId1");
 
                     b.ToTable("Products");
                 });
@@ -570,9 +598,7 @@ namespace OnlineShop.Data.Migrations
 
                     b.HasOne("OnlineShop.Data.Models.OrderDetail", "OrderDetail")
                         .WithMany()
-                        .HasForeignKey("OrderDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderDetailId1");
                 });
 
             modelBuilder.Entity("OnlineShop.Data.Models.ShippingDetail", b =>

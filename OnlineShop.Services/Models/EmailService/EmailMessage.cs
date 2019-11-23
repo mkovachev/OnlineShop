@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace OnlineShop.Services.Models.EmailService
 {
@@ -12,8 +10,8 @@ namespace OnlineShop.Services.Models.EmailService
             FromAddresses = new List<EmailAddress>();
         }
 
-        public List<EmailAddress> ToAddresses { get; set; }
-        public List<EmailAddress> FromAddresses { get; set; }
+        public ICollection<EmailAddress> ToAddresses { get; set; } = new List<EmailAddress>();
+        public ICollection<EmailAddress> FromAddresses { get; set; } = new List<EmailAddress>();
         public string Subject { get; set; }
         public string Content { get; set; }
     }
