@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OnlineShop.Controllers;
 using OnlineShop.Data.Models;
 using System.Threading.Tasks;
 
@@ -47,37 +46,37 @@ namespace OnlineShop.Web.Infrastructure
         {
             using (IServiceScope serviceScope = app.ApplicationServices.CreateScope())
             {
-                var services = serviceScope.ServiceProvider;
+                System.IServiceProvider services = serviceScope.ServiceProvider;
 
-                var db = services.GetService<OnlineShopDbContext>();
+                OnlineShopDbContext db = services.GetService<OnlineShopDbContext>();
 
                 //await db.Database.MigrateAsync();
 
-                var roleManager = services.GetService<RoleManager<IdentityRole>>();
-                var existingRole = await roleManager.FindByNameAsync(WebConstants.AdministratorRole);
+                RoleManager<IdentityRole> roleManager = services.GetService<RoleManager<IdentityRole>>();
+                IdentityRole existingRole = await roleManager.FindByNameAsync(WebConstants.AdministratorRole);
 
                 if (existingRole != null)
                 {
                     return app;
                 }
 
-                var adminRole = new IdentityRole(WebConstants.AdministratorRole);
+                IdentityRole adminRole = new IdentityRole(WebConstants.AdministratorRole);
 
                 await roleManager.CreateAsync(adminRole);
 
-                var admin = new User
+                User admin = new User
                 {
                     UserName = "admin",
                     Email = "admin@onlineshop.com",
                 };
 
-                var userManager = services.GetService<UserManager<User>>();
+                UserManager<User> userManager = services.GetService<UserManager<User>>();
 
                 await userManager.CreateAsync(admin, "adminpass");
 
                 await userManager.AddToRoleAsync(admin, WebConstants.AdministratorRole);
 
-                var user = new User
+                User user = new User
                 {
                     UserName = "user",
                     Email = "user@onlineshop.com",

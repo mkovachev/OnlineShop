@@ -8,8 +8,11 @@ namespace OnlineShop.Services.Infrastructure
     {
         public ServiceMappingProfile()
         {
-            this.CreateMap<Category, AdminCategoryServiceModel>();
+            CreateMap<Category, AdminCategoryServiceModel>();
             //.ForMember(a => a.Name, opt => opt.MapFrom(a => a.Name));
+
+            CreateMap<Category, AdminUserServiceModel>();
+
 
 
         }

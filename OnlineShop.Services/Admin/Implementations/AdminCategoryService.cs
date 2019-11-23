@@ -18,33 +18,33 @@ namespace OnlineShop.Services.Admin.Implementations
 
         public AdminCategoryService(OnlineShopDbContext db, IMapper mapper)
         {
-            this.db = db;
+            this.db = db ?? throw new System.ArgumentNullException(nameof(db));
             this.mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
         }
 
         public async Task<int> CreateAsync(string name)
         {
-            var category = new Category
+            Category category = new Category
             {
                 Name = name
             };
 
-            this.db.Add(category);
+            db.Add(category);
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
             return category.Id;
         }
 
         public async Task<IEnumerable<AdminCategoryServiceModel>> AllAsync()
-            => await this.db
+            => await db
                 .Categories
                 .OrderBy(c => c.Name)
                 .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
         public async Task<AdminCategoryServiceModel> FindByIdAsync(int id)
-        => await this.db
+        => await db
                  .Categories
                  .Where(c => c.Id == id)
                  .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
@@ -52,7 +52,7 @@ namespace OnlineShop.Services.Admin.Implementations
 
         public async Task EditAsync(int id, string name)
         {
-            var category = await this.db.Categories.FindAsync(id);
+            Category category = await db.Categories.FindAsync(id);
 
             if (category == null)
             {
@@ -61,31 +61,31 @@ namespace OnlineShop.Services.Admin.Implementations
 
             category.Name = name;
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var category = await this.db.Categories.FindAsync(id);
+            Category category = await db.Categories.FindAsync(id);
 
             if (category == null)
             {
                 return;
             }
 
-            this.db.Categories.Remove(category);
+            db.Categories.Remove(category);
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
         public bool ExistsById(int id)
         {
-            return this.db.Categories.Any(c => c.Id == id);
+            return db.Categories.Any(c => c.Id == id);
         }
 
         public bool ExistsByName(string name)
         {
-            return this.db.Categories.Any(c => c.Name == name);
+            return db.Categories.Any(c => c.Name == name);
         }
     }
 }
