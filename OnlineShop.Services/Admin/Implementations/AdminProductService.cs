@@ -43,7 +43,6 @@ namespace OnlineShop.Services.Admin.Implementations
             };
 
             this.db.Products.Add(product);
-            //this.db.Categories.Products.Add(product); // TODO
 
             await this.db.SaveChangesAsync();
         }
