@@ -29,7 +29,7 @@ namespace OnlineShop.Services.Admin.Implementations
 
         public async Task CreateAsync(string title, string shortDescription, string longDescription, decimal price, List<Image> images, string thumbnail, int categoryId, int orderDetailId)
         {
-            var product = new Product
+            Product product = new Product
             {
                 Title = title,
                 ShortDescription = shortDescription,
@@ -37,19 +37,19 @@ namespace OnlineShop.Services.Admin.Implementations
                 Price = price,
                 Images = images,
                 Thumbnail = thumbnail,
-                CreatedOn = this.dateTimeProvider.UtcNow(),
+                CreatedOn = dateTimeProvider.UtcNow(),
                 CategoryId = categoryId,
                 OrderDetailId = orderDetailId
             };
 
-            this.db.Products.Add(product);
+            db.Products.Add(product);
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
         public async Task EditAsync(int id, string title, string shortDescription, string longDescription, decimal price, List<Image> images, string thumbnail, int categoryId, int orderDetailId)
         {
-            var product = await this.db.Products.FindAsync(id);
+            Product product = await db.Products.FindAsync(id);
 
             if (product == null)
             {
@@ -61,49 +61,49 @@ namespace OnlineShop.Services.Admin.Implementations
             product.Price = price;
             product.Images = images;
             product.Thumbnail = thumbnail;
-            product.ModifiedOn = this.dateTimeProvider.UtcNow();
+            product.ModifiedOn = dateTimeProvider.UtcNow();
             product.CategoryId = categoryId;
             product.OrderDetailId = orderDetailId;
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var product = await this.db.Products.FindAsync(id);
+            Product product = await db.Products.FindAsync(id);
 
             if (product == null)
             {
                 return;
             }
 
-            product.DeletedOn = this.dateTimeProvider.UtcNow();
+            product.DeletedOn = dateTimeProvider.UtcNow();
             product.IsDeleted = true;
             //this.db.Products.Remove(product);
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
         public async Task<AdminProductServiceModel> FindByIdAsync(int id)
-            => await this.db
+            => await db
                             .Products
                             .Where(p => p.Id == id)
-                            .ProjectTo<AdminProductServiceModel>(this.mapper.ConfigurationProvider)
+                            .ProjectTo<AdminProductServiceModel>(mapper.ConfigurationProvider)
                             .FirstOrDefaultAsync();
 
         public bool ExistsById(int id)
         {
-            return this.db.Products.Any(c => c.Id == id);
+            return db.Products.Any(c => c.Id == id);
         }
 
         public bool ExistsByName(string title)
-            => this.db.Products.Any(c => c.Title == title);
+            => db.Products.Any(c => c.Title == title);
 
         public async Task<AdminProductServiceModel> DetailsAsync(int id)
-            => await this.db
+            => await db
                     .Products
                     .Where(p => p.Id == id)
-                    .ProjectTo<AdminProductServiceModel>(this.mapper.ConfigurationProvider)
+                    .ProjectTo<AdminProductServiceModel>(mapper.ConfigurationProvider)
                     .FirstOrDefaultAsync();
     }
 }

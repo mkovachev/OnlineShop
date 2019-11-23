@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Data.Models
 {
-    public class Category: IAuditable, IDeletable
+    public class Category : IAuditable, IDeletable
     {
         public int Id { get; set; }
 

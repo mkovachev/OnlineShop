@@ -23,7 +23,7 @@ namespace OnlineShop.Services.Admin.Implementations
         public async Task<IEnumerable<AdminUserServiceModel>> AllAsync()
             => await db
                        .Users
-                       .ProjectTo<AdminUserServiceModel>(this.mapper.ConfigurationProvider)
+                       .ProjectTo<AdminUserServiceModel>(mapper.ConfigurationProvider)
                        .ToListAsync();
     }
 }

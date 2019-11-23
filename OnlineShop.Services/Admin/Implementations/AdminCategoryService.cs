@@ -6,7 +6,6 @@ using OnlineShop.Data.Models;
 using OnlineShop.Services.Admin.Interfaces;
 using OnlineShop.Services.Admin.Models;
 using OnlineShop.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,7 +30,7 @@ namespace OnlineShop.Services.Admin.Implementations
             Category category = new Category
             {
                 Name = name,
-                CreatedOn = this.dateTimeProvider.UtcNow()
+                CreatedOn = dateTimeProvider.UtcNow()
             };
 
             db.Add(category);
@@ -51,7 +50,7 @@ namespace OnlineShop.Services.Admin.Implementations
             }
 
             category.Name = name;
-            category.ModifiedOn = this.dateTimeProvider.UtcNow();
+            category.ModifiedOn = dateTimeProvider.UtcNow();
 
             await db.SaveChangesAsync();
         }
@@ -65,7 +64,7 @@ namespace OnlineShop.Services.Admin.Implementations
                 return;
             }
 
-            category.DeletedOn = this.dateTimeProvider.UtcNow();
+            category.DeletedOn = dateTimeProvider.UtcNow();
             category.IsDeleted = true;
             //db.Categories.Remove(category);
 
@@ -76,14 +75,14 @@ namespace OnlineShop.Services.Admin.Implementations
           => await db
               .Categories
               .OrderBy(c => c.Name)
-              .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
+              .ProjectTo<AdminCategoryServiceModel>(mapper.ConfigurationProvider)
               .ToListAsync();
 
         public async Task<AdminCategoryServiceModel> FindByIdAsync(int id)
         => await db
                  .Categories
                  .Where(c => c.Id == id)
-                 .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
+                 .ProjectTo<AdminCategoryServiceModel>(mapper.ConfigurationProvider)
                  .FirstOrDefaultAsync();
 
         public bool ExistsById(int id) => db.Categories.Any(c => c.Id == id);
