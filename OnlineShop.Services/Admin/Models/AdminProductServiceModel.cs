@@ -1,34 +1,22 @@
-﻿using OnlineShop.Data.Contracts;
+﻿using OnlineShop.Data.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using Image = OnlineShop.Data.Models.Image;
 
-namespace OnlineShop.Data.Models
+namespace OnlineShop.Services.Admin.Models
 {
-    public class Product : IAuditable, IDeletable
-
+    public class AdminProductServiceModel
     {
         public int Id { get; set; }
 
-        [Required]
-        [MinLength(DataConstants.ProductTitleMinLength)]
-        [MaxLength(DataConstants.ProductTitleMaxLength)]
         public string Title { get; set; }
 
-        [MaxLength(DataConstants.ProductShortDescriptionMaxLength)]
         public string ShortDescription { get; set; }
 
-        [MinLength(DataConstants.ProductDescriptionMinLength)]
-        [MaxLength(DataConstants.ProductDescriptionMaxLength)]
         public string LongDescription { get; set; }
 
-        [Range(0, 10000)]
-        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
-        [MinLength(10)]
-        [MaxLength(2000)]
-        [DataType(DataType.ImageUrl)]
         public string Thumbnail { get; set; }
 
         public DateTime CreatedOn { get; set; }

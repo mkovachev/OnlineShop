@@ -7,20 +7,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Controllers.Implementations;
+using OnlineShop.Services.Implementations;
 using OnlineShop.Services.Interfaces;
+using OnlineShop.Services.Models.ShoppingCartService;
 using OnlineShop.Web.Infrastructure;
+using System;
+using System.Collections.Generic;
 
 namespace OnlineShop.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) => this.Configuration = configuration;
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<OnlineShopDbContext>(options 
+            services.AddDbContext<OnlineShopDbContext>(options
                 => options.UseSqlServer(Configuration.GetDefaultConnectionString()));
 
 
@@ -44,7 +48,16 @@ namespace OnlineShop.Web
                    options.Password.RequireUppercase = false;
                });
 
-            services.AddServices(); // reg all from service layer 
+            services.AddServices(); // auto reg services from service layer
+
+            // add Shopping cart
+            services.AddSingleton(sp => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
+
+            // add email services
+            //services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
+
+            services.AddRouting(routing => { routing.LowercaseUrls = true; }); // routing lowercase
 
             services.AddControllersWithViews();
             services.AddRazorPages();

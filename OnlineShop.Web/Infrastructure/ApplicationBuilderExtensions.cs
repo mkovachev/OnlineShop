@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OnlineShop.Controllers;
 using OnlineShop.Data.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Web.Infrastructure
@@ -47,45 +48,45 @@ namespace OnlineShop.Web.Infrastructure
         {
             using (IServiceScope serviceScope = app.ApplicationServices.CreateScope())
             {
-                var services = serviceScope.ServiceProvider;
+                IServiceProvider services = serviceScope.ServiceProvider;
 
-                var db = services.GetService<OnlineShopDbContext>();
+                OnlineShopDbContext db = services.GetService<OnlineShopDbContext>();
 
-                //await db.Database.MigrateAsync();
+                await db.Database.MigrateAsync();
 
-                var roleManager = services.GetService<RoleManager<IdentityRole>>();
-                var existingRole = await roleManager.FindByNameAsync(ControllerValidations.AdministratorRole);
+                RoleManager<IdentityRole> roleManager = services.GetService<RoleManager<IdentityRole>>();
 
-                if (existingRole != null)
+                //create role = "Administrator"
+                if (!await roleManager.RoleExistsAsync(WebConstants.AdministratorRole))
                 {
-                    return app;
+                    IdentityRole adminRole = new IdentityRole(WebConstants.AdministratorRole);
+                    await roleManager.CreateAsync(adminRole);
                 }
 
-                var adminRole = new IdentityRole(ControllerValidations.AdministratorRole);
+                UserManager<IdentityUser> userManager = services.GetService<UserManager<IdentityUser>>();
 
-                await roleManager.CreateAsync(adminRole);
-
-                var admin = new User
+                if (await userManager.FindByNameAsync("admin") == null)
                 {
-                    UserName = "admin",
-                    Email = "admin@onlineshop.com",
-                };
+                    User admin = new User
+                    {
+                        UserName = "admin",
+                        Email = "admin@onlineshop.com"
+                    };
 
-                var userManager = services.GetService<UserManager<User>>();
+                    await userManager.CreateAsync(admin, "adminpass");
+                    await userManager.AddToRoleAsync(admin, WebConstants.AdministratorRole);
+                }
 
-                await userManager.CreateAsync(admin, "adminpass");
-
-                await userManager.AddToRoleAsync(admin, ControllerValidations.AdministratorRole);
-
-                var user = new User
+                if (await userManager.FindByNameAsync("user") == null)
                 {
-                    UserName = "user",
-                    Email = "user@onlineshop.com",
-                };
-
-                await userManager.CreateAsync(user, "userpass");
-
-                await db.SaveChangesAsync();
+                    User user = new User
+                    {
+                        UserName = "user",
+                        Email = "user@onlineshop.com"
+                    };
+                    await userManager.CreateAsync(user, "userpass");
+                    await db.SaveChangesAsync();
+                }
             }
 
             return app;

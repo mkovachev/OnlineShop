@@ -7,11 +7,15 @@ namespace OnlineShop.Data.Models
 {
     public class OrderDetail : IAuditable, IDeletable
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Range(0, 10000)]
         [DataType(DataType.Currency)]
         public decimal OrderTotal { get; set; }
+
+        [Range(0, 10000)]
+        [DataType(DataType.Currency)]
+        public decimal ProductPrice { get; set; }
 
         public DateTime OrderPlaced { get; set; }
 

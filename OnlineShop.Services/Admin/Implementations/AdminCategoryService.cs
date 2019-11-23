@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineShop.Data.Models;
 using OnlineShop.Services.Admin.Interfaces;
 using OnlineShop.Services.Admin.Models;
+using OnlineShop.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,44 +16,33 @@ namespace OnlineShop.Services.Admin.Implementations
     {
         private readonly OnlineShopDbContext db;
         private readonly IMapper mapper;
+        private readonly IDateTimeProvider dateTimeProvider;
 
-        public AdminCategoryService(OnlineShopDbContext db, IMapper mapper)
+        public AdminCategoryService(OnlineShopDbContext db, IMapper mapper, IDateTimeProvider dateTimeProvider)
         {
-            this.db = db;
+            this.db = db ?? throw new System.ArgumentNullException(nameof(db));
             this.mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
+            this.dateTimeProvider = dateTimeProvider ?? throw new System.ArgumentNullException(nameof(dateTimeProvider));
         }
 
         public async Task<int> CreateAsync(string name)
         {
-            var category = new Category
+            Category category = new Category
             {
-                Name = name
+                Name = name,
+                CreatedOn = dateTimeProvider.UtcNow()
             };
 
-            this.db.Add(category);
+            db.Add(category);
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
             return category.Id;
         }
 
-        public async Task<IEnumerable<AdminCategoryServiceModel>> AllAsync()
-            => await this.db
-                .Categories
-                .OrderBy(c => c.Name)
-                .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
-                .ToListAsync();
-
-        public async Task<AdminCategoryServiceModel> FindByIdAsync(int id)
-        => await this.db
-                 .Categories
-                 .Where(c => c.Id == id)
-                 .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
-                 .FirstOrDefaultAsync();
-
         public async Task EditAsync(int id, string name)
         {
-            var category = await this.db.Categories.FindAsync(id);
+            Category category = await db.Categories.FindAsync(id);
 
             if (category == null)
             {
@@ -60,32 +50,45 @@ namespace OnlineShop.Services.Admin.Implementations
             }
 
             category.Name = name;
+            category.ModifiedOn = dateTimeProvider.UtcNow();
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var category = await this.db.Categories.FindAsync(id);
+            Category category = await db.Categories.FindAsync(id);
 
             if (category == null)
             {
                 return;
             }
 
-            this.db.Categories.Remove(category);
+            category.DeletedOn = dateTimeProvider.UtcNow();
+            category.IsDeleted = true;
+            //db.Categories.Remove(category);
 
-            await this.db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
-        public bool ExistsById(int id)
-        {
-            return this.db.Categories.Any(c => c.Id == id);
-        }
+        public async Task<IEnumerable<AdminCategoryServiceModel>> AllAsync()
+          => await db
+              .Categories
+              .OrderBy(c => c.Name)
+              .ProjectTo<AdminCategoryServiceModel>(mapper.ConfigurationProvider)
+              .ToListAsync();
 
-        public bool ExistsByName(string name)
-        {
-            return this.db.Categories.Any(c => c.Name == name);
-        }
+        public async Task<AdminCategoryServiceModel> FindByIdAsync(int id)
+        => await db
+                 .Categories
+                 .Where(c => c.Id == id)
+                 .ProjectTo<AdminCategoryServiceModel>(mapper.ConfigurationProvider)
+                 .FirstOrDefaultAsync();
+
+        public bool ExistsById(int id) => db.Categories.Any(c => c.Id == id);
+
+        public bool ExistsByName(string name) => db.Categories.Any(c => c.Name == name);
+
+
     }
 }

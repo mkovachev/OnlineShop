@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Services.Admin.Interfaces;
@@ -11,16 +12,18 @@ namespace OnlineShop.Services.Admin.Implementations
     public class AdminUserService : IAdminUserService
     {
         private readonly OnlineShopDbContext db;
+        private readonly IMapper mapper;
 
-        public AdminUserService(OnlineShopDbContext db)
+        public AdminUserService(OnlineShopDbContext db, IMapper mapper)
         {
-            this.db = db;
+            this.db = db ?? throw new System.ArgumentNullException(nameof(db));
+            this.mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
         }
 
         public async Task<IEnumerable<AdminUserServiceModel>> AllAsync()
-            => await this.db
+            => await db
                        .Users
-                       .ProjectTo<AdminUserServiceModel>(null)
+                       .ProjectTo<AdminUserServiceModel>(mapper.ConfigurationProvider)
                        .ToListAsync();
     }
 }
