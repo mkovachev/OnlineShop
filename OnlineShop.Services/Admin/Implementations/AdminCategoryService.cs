@@ -6,6 +6,7 @@ using OnlineShop.Data.Models;
 using OnlineShop.Services.Admin.Interfaces;
 using OnlineShop.Services.Admin.Models;
 using OnlineShop.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,7 +30,8 @@ namespace OnlineShop.Services.Admin.Implementations
         {
             Category category = new Category
             {
-                Name = name
+                Name = name,
+                CreatedOn = this.dateTimeProvider.UtcNow()
             };
 
             db.Add(category);
@@ -38,20 +40,6 @@ namespace OnlineShop.Services.Admin.Implementations
 
             return category.Id;
         }
-
-        public async Task<IEnumerable<AdminCategoryServiceModel>> AllAsync()
-            => await db
-                .Categories
-                .OrderBy(c => c.Name)
-                .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
-                .ToListAsync();
-
-        public async Task<AdminCategoryServiceModel> FindByIdAsync(int id)
-        => await db
-                 .Categories
-                 .Where(c => c.Id == id)
-                 .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
-                 .FirstOrDefaultAsync();
 
         public async Task EditAsync(int id, string name)
         {
@@ -63,6 +51,7 @@ namespace OnlineShop.Services.Admin.Implementations
             }
 
             category.Name = name;
+            category.ModifiedOn = this.dateTimeProvider.UtcNow();
 
             await db.SaveChangesAsync();
         }
@@ -76,20 +65,31 @@ namespace OnlineShop.Services.Admin.Implementations
                 return;
             }
 
-            category. = this.dateTimeProvider.UtcNow();
-            db.Categories.Remove(category);
+            category.DeletedOn = this.dateTimeProvider.UtcNow();
+            category.IsDeleted = true;
+            //db.Categories.Remove(category);
 
             await db.SaveChangesAsync();
         }
 
-        public bool ExistsById(int id)
-        {
-            return db.Categories.Any(c => c.Id == id);
-        }
+        public async Task<IEnumerable<AdminCategoryServiceModel>> AllAsync()
+          => await db
+              .Categories
+              .OrderBy(c => c.Name)
+              .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
+              .ToListAsync();
 
-        public bool ExistsByName(string name)
-        {
-            return db.Categories.Any(c => c.Name == name);
-        }
+        public async Task<AdminCategoryServiceModel> FindByIdAsync(int id)
+        => await db
+                 .Categories
+                 .Where(c => c.Id == id)
+                 .ProjectTo<AdminCategoryServiceModel>(this.mapper.ConfigurationProvider)
+                 .FirstOrDefaultAsync();
+
+        public bool ExistsById(int id) => db.Categories.Any(c => c.Id == id);
+
+        public bool ExistsByName(string name) => db.Categories.Any(c => c.Name == name);
+
+
     }
 }

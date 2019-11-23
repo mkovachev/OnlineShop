@@ -27,7 +27,7 @@ namespace OnlineShop.Services.Admin.Implementations
         }
 
 
-        public async Task CreateAsync(string title, string shortDescription, string longDescription, decimal price, List<Image> images, string thumbnail, DateTime createdOn, int categoryId, int orderDetailId)
+        public async Task CreateAsync(string title, string shortDescription, string longDescription, decimal price, List<Image> images, string thumbnail, int categoryId, int orderDetailId)
         {
             var product = new Product
             {
@@ -48,7 +48,7 @@ namespace OnlineShop.Services.Admin.Implementations
             await this.db.SaveChangesAsync();
         }
 
-        public async Task EditAsync(int id, string title, string shortDescription, string longDescription, decimal price, List<Image> images, string thumbnail, DateTime modifiedOn, int categoryId, int orderDetailId)
+        public async Task EditAsync(int id, string title, string shortDescription, string longDescription, decimal price, List<Image> images, string thumbnail, int categoryId, int orderDetailId)
         {
             var product = await this.db.Products.FindAsync(id);
 
@@ -79,7 +79,8 @@ namespace OnlineShop.Services.Admin.Implementations
             }
 
             product.DeletedOn = this.dateTimeProvider.UtcNow();
-            this.db.Products.Remove(product);
+            product.IsDeleted = true;
+            //this.db.Products.Remove(product);
 
             await this.db.SaveChangesAsync();
         }

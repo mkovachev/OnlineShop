@@ -16,7 +16,6 @@ namespace OnlineShop.Services.Admin.Interfaces
             decimal price,
             List<Image> images,
             string thumbnail,
-            DateTime createdOn,
             int categoryId,
             int orderDetailId
             );
@@ -29,7 +28,6 @@ namespace OnlineShop.Services.Admin.Interfaces
             decimal price,
             List<Image> images,
             string thumbnail,
-            DateTime modifiedOn,
             int categoryId,
             int orderDetailId
             );
