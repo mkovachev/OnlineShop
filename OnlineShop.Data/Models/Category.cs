@@ -1,5 +1,6 @@
 ﻿using OnlineShop.Data.Contracts;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Data.Models
@@ -12,6 +13,8 @@ namespace OnlineShop.Data.Models
         [MinLength(DataConstants.CategoryNameMinLength)]
         [MaxLength(DataConstants.CategoryNameMaxLength)]
         public string Name { get; set; }
+
+        public ICollection<Product> Products { get; set; } = new List<Product>();
 
         public DateTime CreatedOn { get; set; }
 
