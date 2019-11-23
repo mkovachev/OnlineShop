@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineShop.Data.Models;
 using OnlineShop.Services.Admin.Interfaces;
 using OnlineShop.Services.Admin.Models;
+using OnlineShop.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,11 +16,13 @@ namespace OnlineShop.Services.Admin.Implementations
     {
         private readonly OnlineShopDbContext db;
         private readonly IMapper mapper;
+        private readonly IDateTimeProvider dateTimeProvider;
 
-        public AdminCategoryService(OnlineShopDbContext db, IMapper mapper)
+        public AdminCategoryService(OnlineShopDbContext db, IMapper mapper, IDateTimeProvider dateTimeProvider)
         {
             this.db = db ?? throw new System.ArgumentNullException(nameof(db));
             this.mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
+            this.dateTimeProvider = dateTimeProvider ?? throw new System.ArgumentNullException(nameof(dateTimeProvider));
         }
 
         public async Task<int> CreateAsync(string name)
@@ -73,6 +76,7 @@ namespace OnlineShop.Services.Admin.Implementations
                 return;
             }
 
+            category. = this.dateTimeProvider.UtcNow();
             db.Categories.Remove(category);
 
             await db.SaveChangesAsync();
