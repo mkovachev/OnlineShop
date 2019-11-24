@@ -1,0 +1,49 @@
+﻿@model ShoppingCartViewModel
+@{
+    ViewData["Title"] = "Your shopping cart";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row checkoutForm">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th>Amount</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id" asp-route-title="@item.Product.Title.ToFriendlyUrl()">
+                            @item.Product.Title
+                        </a>
+                    </td>
+                    <td>@item.Product.Price.ToString("N")</td>
+                    <td>@((item.Price * item.Product.Price).ToString("N"))</td>
+                    <td>@item.Price</td>
+                    <td><a class="glyphicon glyphicon-remove-circle text-danger text-center" asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id"></a></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td>@Model.ShoppingCartTotal.ToString("N")</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-right">
+        <div class="row">
+            <a class="btn btn-success btn-sm" id="cartButton" asp-controller="Order" asp-action="Checkout">Checkout</a>
+            <a class="btn btn-info btn-sm" id="cartButton" asp-controller="Home" asp-action="Index">Continue Shopping</a>
+        </div>
+    </div>
+</div>

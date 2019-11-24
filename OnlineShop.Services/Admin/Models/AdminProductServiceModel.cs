@@ -1,11 +1,12 @@
-﻿using OnlineShop.Data.Models;
+﻿using OnlineShop.Common.Mapping;
+using OnlineShop.Data.Models;
 using System;
 using System.Collections.Generic;
 using Image = OnlineShop.Data.Models.Image;
 
 namespace OnlineShop.Services.Admin.Models
 {
-    public class AdminProductServiceModel
+    public class AdminProductServiceModel : IMapFrom<Product>
     {
         public int Id { get; set; }
 

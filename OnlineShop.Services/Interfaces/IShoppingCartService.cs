@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Services.Interfaces
 {
-    public interface IShoppingCartService
+    public interface IShoppingCartService //: ISingletonService
     {
         Task<Product> FindProductByIdAsync(int productId);
 

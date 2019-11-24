@@ -21,7 +21,7 @@ namespace OnlineShop.Data.Models
 
         [Required]
         [StringLength(100)]
-        public string ShippingAddress { get; set; }
+        public string Address { get; set; }
 
         [Required]
         [Display(Name = "Postal code")]

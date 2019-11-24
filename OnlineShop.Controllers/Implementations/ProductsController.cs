@@ -28,7 +28,7 @@ namespace OnlineShop.Controllers.Implementations
             {
                 Id = product.Id,
                 Title = product.Title,
-                Description = product.LongDescription,
+                LongDescription = product.LongDescription,
                 Images = product.Images
             }));
 

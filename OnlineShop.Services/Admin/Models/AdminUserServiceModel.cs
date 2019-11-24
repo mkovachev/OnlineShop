@@ -1,8 +1,10 @@
-﻿using System;
+﻿using OnlineShop.Common.Mapping;
+using OnlineShop.Data.Models;
+using System;
 
 namespace OnlineShop.Services.Admin.Models
 {
-    public class AdminUserServiceModel
+    public class AdminUserServiceModel : IMapFrom<User>
     {
         public string Id { get; set; }
 

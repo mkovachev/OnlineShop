@@ -1,12 +1,13 @@
 ﻿using OnlineShop.Data;
 using OnlineShop.Data.Models;
+using OnlineShop.Services.Common;
 using OnlineShop.Services.Models.ProductService;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Services.Interfaces
 {
-    public interface IProductService
+    public interface IProductService : IService
     {
         Task<IEnumerable<ProductListingServiceModel>> AllAsync(int page = 1, int pageSize = DataConstants.PageSize);
 

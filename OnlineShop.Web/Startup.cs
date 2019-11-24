@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Controllers.Implementations;
-using OnlineShop.Services.Infrastructure;
-using OnlineShop.Services.Interfaces;
+using OnlineShop.Services.Common;
 using OnlineShop.Services.Models.ShoppingCartService;
 using OnlineShop.Web.Infrastructure;
 using System;
@@ -37,6 +36,8 @@ namespace OnlineShop.Web
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<OnlineShopDbContext>();
 
+            services.AddServices(); // auto reg all from service layer
+
             services.AddAutoMapper(
                 typeof(IService).Assembly,
                 typeof(HomeController).Assembly);
@@ -53,24 +54,16 @@ namespace OnlineShop.Web
 
             services.AddServices(); // auto reg all services
 
-            // add Shopping cart
-            services.AddSingleton(sp => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
-
-            // add email services
-            //services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
-            //services.AddTransient<IEmailService, EmailService>();
+            // Shopping cart
+            services.AddSingleton(s => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
 
             services
-                .AddMvc(options => options
-                    .AddAutoValidateAntiforgeryToken())
+                .AddMvc(options => options.AddAutoValidateAntiforgeryToken())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddRouting(routing => { routing.LowercaseUrls = true; }); // routing lowercase
+            services.AddRouting(routing => { routing.LowercaseUrls = true; });
 
-            //services.AddSession(options =>  // session
-            //{
-            //    options.IdleTimeout = TimeSpan.FromSeconds(30);
-            //});
+            //services.AddSession(options => options.IdleTimeout = TimeSpan.FromSeconds(30));
 
         }
 

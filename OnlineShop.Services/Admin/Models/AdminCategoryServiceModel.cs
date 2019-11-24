@@ -1,10 +1,11 @@
-﻿using OnlineShop.Data.Models;
+﻿using OnlineShop.Common.Mapping;
+using OnlineShop.Data.Models;
 using System;
 using System.Collections.Generic;
 
 namespace OnlineShop.Services.Admin.Models
 {
-    public class AdminCategoryServiceModel
+    public class AdminCategoryServiceModel : IMapFrom<Category>
     {
         public int Id { get; set; }
 

@@ -1,0 +1,30 @@
+﻿@model ProductListingViewModel
+@{
+    ViewData["Title"] = "Result found";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@await Html.PartialAsync("_Search");
+
+<br />
+
+@if (Model.Products.Any())
+{
+    <div class="row home-page">
+        @foreach (var product in Model.Products)
+        {
+            @await Html.PartialAsync("_ProductListing", product)
+        }
+    </div>
+}
+else
+{
+    <h3>Sorry, no products found...</h3>
+    <div class="go-back">
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-info btn-sm">Go back</a>
+    </div>
+}
+
+
+@await Html.PartialAsync("_Paging")

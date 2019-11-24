@@ -1,8 +1,9 @@
-﻿using System;
+﻿using OnlineShop.Services.Common;
+using System;
 
 namespace OnlineShop.Services.Interfaces
 {
-    public interface IDateTimeProvider
+    public interface IDateTimeProvider : ISingletonService
     {
         DateTime UtcNow();
     }

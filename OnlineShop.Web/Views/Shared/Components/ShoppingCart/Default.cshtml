@@ -1,0 +1,18 @@
+﻿@model ShoppingCartViewModel
+@{
+    ViewData["Title"] = "Default";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+<li>
+    <a asp-controller="ShoppingCart">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+        <span id="cart-status">
+            @Model.ShoppingCart.ShoppingCartItems.Count
+        </span>
+    </a>
+</li>
+
+

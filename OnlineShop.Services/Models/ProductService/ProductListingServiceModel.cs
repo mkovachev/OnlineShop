@@ -1,6 +1,9 @@
-﻿namespace OnlineShop.Services.Models.ProductService
+﻿using OnlineShop.Common.Mapping;
+using OnlineShop.Data.Models;
+
+namespace OnlineShop.Services.Models.ProductService
 {
-    public class ProductListingServiceModel
+    public class ProductListingServiceModel : IMapFrom<Product>, IMapTo<Product>
     {
         public int Id { get; set; }
 

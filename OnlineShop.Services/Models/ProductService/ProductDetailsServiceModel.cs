@@ -1,10 +1,11 @@
-﻿using OnlineShop.Data.Models;
+﻿using OnlineShop.Common.Mapping;
+using OnlineShop.Data.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Services.Models.ProductService
 {
-    public class ProductDetailsServiceModel
+    public class ProductDetailsServiceModel : IMapFrom<Product>
     {
         public string Title { get; set; }
 

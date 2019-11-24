@@ -1,0 +1,13 @@
+﻿<li class="dropdown">
+    <a asp-controller="Categories" asp-action="Index" class="dropdown-toggle" data-toggle="dropdown">
+        Splitboard<b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        @foreach (var category in Model)
+        {
+            <li>
+                <a asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@category.Id">@category.Name</a>
+            </li>
+        }
+    </ul>
+</li>

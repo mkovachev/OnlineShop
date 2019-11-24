@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShop.Controllers;
 using OnlineShop.Data.Models;
 using System;
 using System.Threading.Tasks;
@@ -57,14 +58,15 @@ namespace OnlineShop.Web.Infrastructure
                 RoleManager<IdentityRole> roleManager = services.GetService<RoleManager<IdentityRole>>();
 
                 //create role = "Administrator"
-                if (!await roleManager.RoleExistsAsync(WebConstants.AdministratorRole))
+                if (!await roleManager.RoleExistsAsync(ControllerConstants.AdministratorRole))
                 {
-                    IdentityRole adminRole = new IdentityRole(WebConstants.AdministratorRole);
+                    IdentityRole adminRole = new IdentityRole(ControllerConstants.AdministratorRole);
                     await roleManager.CreateAsync(adminRole);
                 }
 
                 UserManager<IdentityUser> userManager = services.GetService<UserManager<IdentityUser>>();
 
+                // create admin for testing
                 if (await userManager.FindByNameAsync("admin") == null)
                 {
                     User admin = new User
@@ -74,9 +76,10 @@ namespace OnlineShop.Web.Infrastructure
                     };
 
                     await userManager.CreateAsync(admin, "adminpass");
-                    await userManager.AddToRoleAsync(admin, WebConstants.AdministratorRole);
+                    await userManager.AddToRoleAsync(admin, ControllerConstants.AdministratorRole);
                 }
 
+                // create user for testing
                 if (await userManager.FindByNameAsync("user") == null)
                 {
                     User user = new User
