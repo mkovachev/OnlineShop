@@ -25,4 +25,9 @@
     <ProjectReference Include="..\OnlineShop.Data\OnlineShop.Data.csproj" />
     <ProjectReference Include="..\OnlineShop.Services\OnlineShop.Services.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\templates\Email\" />
+  </ItemGroup>
 </Project>

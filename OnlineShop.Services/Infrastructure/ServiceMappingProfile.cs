@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OnlineShop.Data.Models;
+using OnlineShop.Services.Models.CategoryService;
 using OnlineShop.Services.Models.ProductService;
 
 namespace OnlineShop.Services.Infrastructure
@@ -10,6 +11,8 @@ namespace OnlineShop.Services.Infrastructure
         {
             this.
                 CreateMap<Product, ProductListingServiceModel>();
+                CreateMap<Product, ProductDetailsServiceModel>();
+                CreateMap<Category, CategoryServiceModel>();
         }
     }
 }
