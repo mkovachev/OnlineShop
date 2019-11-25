@@ -36,7 +36,10 @@ namespace OnlineShop.Web
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<OnlineShopDbContext>();
 
+
             services.AddServices(); // auto reg all from service layer
+
+            //services.AddAutoMapper(); // auto mapping
 
             services.AddAutoMapper(
                 typeof(IService).Assembly,
@@ -51,6 +54,7 @@ namespace OnlineShop.Web
                    options.Password.RequireNonAlphanumeric = false;
                    options.Password.RequireUppercase = false;
                });
+
 
             services.AddServices(); // auto reg all services
 
