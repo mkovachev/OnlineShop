@@ -2,6 +2,7 @@ using AutoMapper;
 using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +25,13 @@ namespace OnlineShop.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+
+            services
+               .Configure<CookiePolicyOptions>(options =>
+               {
+                   options.CheckConsentNeeded = context => true;
+                   options.MinimumSameSitePolicy = SameSiteMode.None;
+               });
 
             services.AddDbContext<OnlineShopDbContext>(options
                 => options.UseSqlServer(Configuration.GetDefaultConnectionString()));
@@ -36,14 +42,6 @@ namespace OnlineShop.Web
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<OnlineShopDbContext>();
 
-
-            services.AddServices(); // auto reg all services
-
-            // auto req all mappings
-            services.AddAutoMapper(
-                typeof(IService).Assembly,
-                typeof(HomeController).Assembly);
-
             services
                .Configure<IdentityOptions>(options =>
                {
@@ -53,6 +51,13 @@ namespace OnlineShop.Web
                    options.Password.RequireNonAlphanumeric = false;
                    options.Password.RequireUppercase = false;
                });
+
+            services.AddServices(); // auto reg all services
+
+            // auto req all mappings
+            services.AddAutoMapper(
+                typeof(IService).Assembly,
+                typeof(HomeController).Assembly);
 
             // Shopping cart
             services.AddSingleton(s => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
@@ -65,6 +70,8 @@ namespace OnlineShop.Web
 
             //services.AddSession(options => options.IdleTimeout = TimeSpan.FromSeconds(30));
 
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
