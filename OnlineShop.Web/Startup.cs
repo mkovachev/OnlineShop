@@ -37,10 +37,9 @@ namespace OnlineShop.Web
                 .AddEntityFrameworkStores<OnlineShopDbContext>();
 
 
-            services.AddServices(); // auto reg all from service layer
+            services.AddServices(); // auto reg services
 
-            //services.AddAutoMapper(); // auto mapping
-
+            // auto req all mappings
             services.AddAutoMapper(
                 typeof(IService).Assembly,
                 typeof(HomeController).Assembly);

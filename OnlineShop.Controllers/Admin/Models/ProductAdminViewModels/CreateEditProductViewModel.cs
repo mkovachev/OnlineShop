@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShop.Controllers.Admin.Models.Product
+namespace OnlineShop.Controllers.Admin.Models.ProductAdminViewModels
 {
     public class CreateEditProductViewModel
     {

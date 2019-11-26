@@ -8,7 +8,7 @@
         <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-title="@Model.Title.ToFriendlyUrl()">
             <div class="gallery-image img-responsive" style="background-image:url(@Model.Thumbnail)"></div>
             <!--<img src="Model.Thumbnail" class="img-responsive" />-->
-            <img src="https://picsum.photos/500/300/?random&giud=@(Guid.NewGuid())" class="img-responsive">
+            <img src="https://picsum.photos/500/300/)" class="img-responsive">
         </a>
         <div class="caption">
             <h4 class="pull-right">@Model.Price.ToString("N")</h4>

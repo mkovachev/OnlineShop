@@ -34,7 +34,7 @@ namespace OnlineShop.Web.Infrastructure
 
             foreach (var modelRegistration in modelRegistrations)
             {
-                if (modelRegistration != null)
+                if (modelRegistration.MapFrom != null)
                 {
                     this.CreateMap(modelRegistration.MapFrom, modelRegistration.Type);
                 }

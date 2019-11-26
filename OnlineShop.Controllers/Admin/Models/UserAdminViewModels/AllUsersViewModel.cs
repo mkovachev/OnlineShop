@@ -2,7 +2,7 @@
 using OnlineShop.Services.Admin.Models;
 using System.Collections.Generic;
 
-namespace OnlineShop.Controllers.Admin.Models.User
+namespace OnlineShop.Controllers.Admin.Models.UserAdminViewModels
 {
     public class AllUsersViewModel
     {

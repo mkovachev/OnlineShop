@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Controllers.Admin.Models.Category;
+using OnlineShop.Controllers.Admin.Models.CategoryAdminViewModels;
 using OnlineShop.Controllers.Infrastructure;
 using OnlineShop.Services.Admin.Interfaces;
 using OnlineShop.Services.Admin.Models;

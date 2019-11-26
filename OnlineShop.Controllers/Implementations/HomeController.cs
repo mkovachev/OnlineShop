@@ -34,12 +34,14 @@ namespace OnlineShop.Controllers.Implementations
             //    this.HttpContext.Session.SetString(sessionKey, sessionId);
             //}
 
-            return View(new ProductListingViewModel
+            return await Task.Run(async () => View(new ProductListingViewModel
             {
                 Products = await this.products.AllAsync(page, DataConstants.PageSize),
                 Current = page,
                 TotalPages = (int)Math.Ceiling(this.products.TotalPages() / (double)DataConstants.PageSize)
-            });
+            }));
+
+            // return await Task.Run(() => View());
         }
 
         public async Task<IActionResult> Search(ProductListingViewModel model)
@@ -52,8 +54,6 @@ namespace OnlineShop.Controllers.Implementations
         public async Task<IActionResult> About() => await Task.Run(() => View());
 
         public async Task<IActionResult> Contact() => await Task.Run(() => View());
-
-        public IActionResult Privacy() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

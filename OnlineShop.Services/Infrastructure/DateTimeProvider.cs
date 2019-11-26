@@ -1,7 +1,7 @@
 ﻿using OnlineShop.Services.Interfaces;
 using System;
 
-namespace OnlineShop.Services.Models
+namespace OnlineShop.Services.Infrastructure
 {
     public class DateTimeProvider : IDateTimeProvider
     {
