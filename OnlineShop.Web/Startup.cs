@@ -37,7 +37,7 @@ namespace OnlineShop.Web
                 .AddEntityFrameworkStores<OnlineShopDbContext>();
 
 
-            services.AddServices(); // auto reg services
+            services.AddServices(); // auto reg all services
 
             // auto req all mappings
             services.AddAutoMapper(
@@ -53,9 +53,6 @@ namespace OnlineShop.Web
                    options.Password.RequireNonAlphanumeric = false;
                    options.Password.RequireUppercase = false;
                });
-
-
-            services.AddServices(); // auto reg all services
 
             // Shopping cart
             services.AddSingleton(s => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
