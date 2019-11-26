@@ -55,9 +55,7 @@ namespace OnlineShop.Web
             services.AddServices(); // auto reg all services
 
             // auto req all mappings
-            services.AddAutoMapper(
-                typeof(IService).Assembly,
-                typeof(HomeController).Assembly);
+            services.AddAutoMapper(typeof(IService).Assembly, typeof(HomeController).Assembly);
 
             // Shopping cart
             services.AddSingleton(s => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
@@ -68,7 +66,7 @@ namespace OnlineShop.Web
 
             services.AddRouting(routing => { routing.LowercaseUrls = true; });
 
-            //services.AddSession(options => options.IdleTimeout = TimeSpan.FromSeconds(30));
+            services.AddSession(options => options.IdleTimeout = TimeSpan.FromSeconds(30));
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -86,6 +84,8 @@ namespace OnlineShop.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession(); // always before app.UseEndpoints();
 
             app.UseEndpoints();
 

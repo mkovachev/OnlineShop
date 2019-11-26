@@ -26,20 +26,20 @@ namespace OnlineShop.Controllers.Implementations
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            //var sessionId = this.HttpContext.Session.GetString(sessionKey);
+            var sessionId = this.HttpContext.Session.GetString(sessionKey);
 
-            //if (sessionId == null)
-            //{
-            //    sessionId = this.shoppingCart.Id;
-            //    this.HttpContext.Session.SetString(sessionKey, sessionId);
-            //}
+            if (sessionId == null)
+            {
+                sessionId = this.shoppingCart.Id;
+                this.HttpContext.Session.SetString(sessionKey, sessionId);
+            }
 
-            return await Task.Run(async () => View(new ProductListingViewModel
+            return View(new ProductListingViewModel
             {
                 Products = await this.products.AllAsync(page, DataConstants.PageSize),
                 Current = page,
                 TotalPages = (int)Math.Ceiling(this.products.TotalPages() / (double)DataConstants.PageSize)
-            }));
+            });
 
             // return await Task.Run(() => View());
         }
