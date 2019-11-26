@@ -91,22 +91,27 @@ namespace OnlineShop.Web.Infrastructure
                 }
 
                 // create category for testing
-                var testCategory = new Category
+                if (await db.Categories.FindAsync(11) == null)
                 {
-                    //Id = 1,
-                    Name = "Snowboard"
-                };
+                    var testCategory = new Category
+                    {
+                        Name = "Snowboard"
+                    };
 
-                await db.Categories.AddAsync(testCategory);
+                    await db.Categories.AddAsync(testCategory);
+                }
 
-                // create product for testing
+                //create product for testing
+                if (await db.Products.FindAsync(15) == null)
+                {
                     var testProduct = new Product
                     {
-                        Title = "TestProduct",
-                        Price = 12,
-                        //CategoryId = testCategory.Id 
+                        CategoryId = 11,
+                        Title = "TestProduct"
                     };
-                await db.Products.AddAsync(testProduct);
+
+                    await db.Products.AddAsync(testProduct);
+                }
 
                 await db.SaveChangesAsync();
             }
