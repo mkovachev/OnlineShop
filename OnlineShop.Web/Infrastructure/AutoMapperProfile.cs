@@ -7,6 +7,7 @@ namespace OnlineShop.Web.Infrastructure
 {
     public class AutoMapperProfile : Profile
     {
+        //    TODO not working
         //    public AutoMapperProfile()
         //    {
         //        var mapFromType = typeof(IMapFrom<>);
@@ -59,18 +60,22 @@ namespace OnlineShop.Web.Infrastructure
         // solution 2 working
         public AutoMapperProfile()
         {
+            var mapFromType = typeof(IMapFrom<>);
+            var mapToType = typeof(IMapTo<>);
+            var explicitMapType = typeof(IMapExplicitly);
+
             var allTypes = AppDomain
                 .CurrentDomain
                 .GetAssemblies()
                 .Where(a => a.GetName().Name.StartsWith("OnlineShop."))
-                .SelectMany(a => a.GetTypes());
+                .SelectMany(a => a.GetExportedTypes());
 
             allTypes
                 .Where(t => t.IsClass && !t.IsAbstract && t
-                    .GetInterfaces()
-                    .Where(i => i.IsGenericType)
-                    .Select(i => i.GetGenericTypeDefinition())
-                    .Contains(typeof(IMapFrom<>)))
+                .GetInterfaces()
+                .Where(i => i.IsGenericType)
+                .Select(i => i.GetGenericTypeDefinition())
+                .Contains(typeof(IMapFrom<>)))
                 .Select(t => new
                 {
                     Destination = t,
