@@ -17,11 +17,10 @@ namespace OnlineShop.Web.ViewComponents
             this.shoppingCartServices = shoppingCartServices ?? throw new ArgumentNullException(nameof(shoppingCartServices));
         }
 
-        // same as ShoppingCartController Index
         public async Task<IViewComponentResult> InvokeAsync()
             => await Task.Run(() => View(new ShoppingCartViewModel
             {
-                //ShoppingCart = shoppingCart, //TODO
+                //ShoppingCart = this.shoppingCart, //TODO
                 ShoppingCartTotal = this.shoppingCartServices.GetTotal()
             }));
     }

@@ -17,7 +17,7 @@ namespace OnlineShop.Controllers.Implementations
 
         public async Task<IActionResult> Details(int id)
         {
-            var product = await products.FindByIdAsync(id).ConfigureAwait(false);
+            var product = await products.FindByIdAsync(id);
 
             if (product == null)
             {
