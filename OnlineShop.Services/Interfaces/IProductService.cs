@@ -9,7 +9,7 @@ namespace OnlineShop.Services.Interfaces
 {
     public interface IProductService : IService
     {
-        Task<IEnumerable<ProductListingServiceModel>> AllAsync(int page = 1, int pageSize = DataConstants.PageSize);
+        Task<ICollection<ProductListingServiceModel>> AllAsync(int page = 1, int pageSize = DataConstants.PageSize);
 
         int TotalPages();
 

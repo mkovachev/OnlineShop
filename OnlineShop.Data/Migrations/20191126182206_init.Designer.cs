@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace OnlineShop.Data.Migrations
 {
     [DbContext(typeof(OnlineShopDbContext))]
-    [Migration("20191124181019_init2")]
-    partial class init2
+    [Migration("20191126182206_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -592,7 +592,7 @@ namespace OnlineShop.Data.Migrations
 
             modelBuilder.Entity("OnlineShop.Data.Models.Product", b =>
                 {
-                    b.HasOne("OnlineShop.Data.Models.Category", "Category")
+                    b.HasOne("OnlineShop.Data.Models.Category", null)
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)

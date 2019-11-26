@@ -88,8 +88,27 @@ namespace OnlineShop.Web.Infrastructure
                         Email = "user@onlineshop.com"
                     };
                     await userManager.CreateAsync(user, "userpass");
-                    await db.SaveChangesAsync();
                 }
+
+                // create category for testing
+                var testCategory = new Category
+                {
+                    //Id = 1,
+                    Name = "Snowboard"
+                };
+
+                await db.Categories.AddAsync(testCategory);
+
+                // create product for testing
+                    var testProduct = new Product
+                    {
+                        Title = "TestProduct",
+                        Price = 12,
+                        //CategoryId = testCategory.Id 
+                    };
+                await db.Products.AddAsync(testProduct);
+
+                await db.SaveChangesAsync();
             }
 
             return app;

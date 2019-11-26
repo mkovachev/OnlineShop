@@ -590,7 +590,7 @@ namespace OnlineShop.Data.Migrations
 
             modelBuilder.Entity("OnlineShop.Data.Models.Product", b =>
                 {
-                    b.HasOne("OnlineShop.Data.Models.Category", "Category")
+                    b.HasOne("OnlineShop.Data.Models.Category", null)
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)

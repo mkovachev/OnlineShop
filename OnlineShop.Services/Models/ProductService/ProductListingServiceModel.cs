@@ -1,10 +1,9 @@
-﻿using AutoMapper;
-using OnlineShop.Common.Mapping;
+﻿using OnlineShop.Common.Mapping;
 using OnlineShop.Data.Models;
 
 namespace OnlineShop.Services.Models.ProductService
 {
-    public class ProductListingServiceModel : IMapFrom<Product>, IMapTo<Product>, IMapExplicitly
+    public class ProductListingServiceModel : IMapFrom<Product>
     {
         public int Id { get; set; }
 
@@ -15,11 +14,5 @@ namespace OnlineShop.Services.Models.ProductService
         public string ShortDescription { get; set; }
 
         public string Thumbnail { get; set; }
-
-        public void RegisterMappings(IProfileExpression profile)
-        {
-            profile.CreateMap<Product, ProductListingServiceModel>()
-                .ForMember(p => p.Title, cfg => cfg.MapFrom(p => p.Title));
-        }
     }
 }

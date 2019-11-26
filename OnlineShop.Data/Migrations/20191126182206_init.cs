@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineShop.Data.Migrations
 {
@@ -231,7 +231,7 @@ namespace OnlineShop.Data.Migrations
                     RecipientId = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    ShippingAddress = table.Column<string>(maxLength: 100, nullable: false),
+                    Address = table.Column<string>(maxLength: 100, nullable: false),
                     PostalCode = table.Column<string>(maxLength: 10, nullable: false),
                     City = table.Column<string>(maxLength: 10, nullable: false),
                     Country = table.Column<string>(maxLength: 50, nullable: false),
