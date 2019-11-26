@@ -36,16 +36,16 @@ namespace OnlineShop.Services.Implementations
             => await this.db
                         .Categories
                         .Where(c => c.Id == id)
-                        //.Select(c => new CategoryServiceModel
-                        //{
-                        //    Products = c.Products.Add(p => new ProductListingServiceModel
-                        //    {
-                        //        Title = p.Title,
-                        //        ShortDescription = p.ShortDescription,
-                        //        Thumbnail = p.Thumbnail,
-                        //        Price = p.Price
-                        //    })
-                        //})
+                        .Select(c => new CategoryServiceModel
+                        {
+                            Products = c.Products.Select(p => new ProductListingServiceModel
+                            {
+                                Title = p.Title,
+                                ShortDescription = p.ShortDescription,
+                                Thumbnail = p.Thumbnail,
+                                Price = p.Price
+                            })
+                        })
                         .Skip((page - 1) * pageSize)
                         .Take(pageSize)
                         .ProjectTo<CategoryServiceModel>(this.mapper.ConfigurationProvider)

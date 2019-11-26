@@ -24,7 +24,7 @@ namespace OnlineShop.Services.Implementations
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<ICollection<ProductListingServiceModel>> AllAsync(int page = 1, int pageSize = DataConstants.PageSize)
+        public async Task<IEnumerable<ProductListingServiceModel>> AllAsync(int page = 1, int pageSize = DataConstants.PageSize)
                 => await this.db
                              .Products
                              .OrderByDescending(p => p.CreatedOn)
@@ -35,7 +35,7 @@ namespace OnlineShop.Services.Implementations
 
         public async Task<Product> ByIdAsync(int id) => await this.db.Products.FindAsync(id);
 
-        public async Task<List<ProductListingServiceModel>> SearchAsync(string search)
+        public async Task<IEnumerable<ProductListingServiceModel>> SearchAsync(string search)
         {
             search ??= string.Empty;
 

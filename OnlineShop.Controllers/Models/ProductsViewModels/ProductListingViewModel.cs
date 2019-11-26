@@ -5,7 +5,7 @@ namespace OnlineShop.Controllers.Models.ProductsViewModels
 {
     public class ProductListingViewModel
     {
-        public ICollection<ProductListingServiceModel> Products { get; set; } = new List<ProductListingServiceModel>();
+        public IEnumerable<ProductListingServiceModel> Products { get; set; } = new List<ProductListingServiceModel>();
 
         public string Search { get; set; }
 
