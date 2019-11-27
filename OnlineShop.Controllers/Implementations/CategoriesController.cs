@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Controllers.Implementations
 {
-    public class CategoryController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ICategoryService categories;
 
-        public CategoryController(ICategoryService categories)
+        public CategoriesController(ICategoryService categories)
         {
             this.categories = categories ?? throw new ArgumentNullException(nameof(categories));
         }
