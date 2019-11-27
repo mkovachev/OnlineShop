@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Services.Interfaces
 {
-    public interface IProductService : IService
+    public interface IProductService : ITransientService
     {
         Task<IEnumerable<ProductListingServiceModel>> AllAsync(int page = 1, int pageSize = DataConstants.PageSize);
 

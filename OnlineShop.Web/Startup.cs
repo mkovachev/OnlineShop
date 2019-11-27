@@ -56,11 +56,11 @@ namespace OnlineShop.Web
 
             // auto req all mappings
             services.AddAutoMapper(typeof(Startup));
-            services.AddAutoMapper(typeof(IService).Assembly,
+            services.AddAutoMapper(typeof(ITransientService).Assembly,
                                    typeof(HomeController).Assembly);
 
             // Shopping cart
-            services.AddSingleton(s => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
+            services.AddScoped(s => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
 
             services
                 .AddMvc(options => options.AddAutoValidateAntiforgeryToken())

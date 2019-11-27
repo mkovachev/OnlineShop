@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Services.Interfaces
 {
-    public interface ICategoryService : IService
+    public interface ICategoryService : ITransientService
     {
         Task<Category> ByIdAsync(int id);
 

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Services.Interfaces
 {
-    public interface IOrderService : IService
+    public interface IOrderService : ITransientService
     {
         Task CreateOrderAsync(Order order);
     }

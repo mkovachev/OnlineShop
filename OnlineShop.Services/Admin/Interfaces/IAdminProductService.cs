@@ -1,11 +1,12 @@
 ﻿using OnlineShop.Data.Models;
 using OnlineShop.Services.Admin.Models;
+using OnlineShop.Services.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Services.Admin.Interfaces
 {
-    public interface IAdminProductService
+    public interface IAdminProductService : ITransientService
     {
 
         Task CreateAsync(

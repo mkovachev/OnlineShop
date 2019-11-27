@@ -8,7 +8,7 @@ namespace OnlineShop.Web.Infrastructure
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            var serviceInterfaceType = typeof(IService);
+            var serviceInterfaceType = typeof(ITransientService);
             var scopedServiceInterfaceType = typeof(IScopedService);
             var singletonServiceInterfaceType = typeof(ISingletonService);
 

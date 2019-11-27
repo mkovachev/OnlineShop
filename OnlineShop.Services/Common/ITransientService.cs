@@ -1,6 +1,6 @@
 ﻿namespace OnlineShop.Services.Common
 {
-    public interface IService
+    public interface ITransientService
     {
     }
 }
