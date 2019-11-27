@@ -42,7 +42,7 @@ namespace OnlineShop.Controllers.Implementations
 
             if (!ModelState.IsValid)
             {
-                // TempData.AddErrorMessage("Please fill in all fields");
+                TempData.AddErrorMessage("Please fill in all fields");
                 return View(order);
             }
 
