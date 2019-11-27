@@ -18,7 +18,7 @@ namespace OnlineShop.Controllers.Implementations
 
         public async Task<IActionResult> Index(int id, int page = 1)
         {
-            if (!int.TryParse(id.ToString(), out var n))
+            if (!int.TryParse(id.ToString(), out int n))
             {
                 return NotFound();
             }
