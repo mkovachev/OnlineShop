@@ -74,6 +74,7 @@ body {
 }
 
 /*--------------------------------------- Custom----------------------------------------*/
+
 #cartButton {
     margin-right: 8px;
 }
@@ -112,7 +113,7 @@ a.remove {
 }
 
 .details {
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .formPullRightButton {
@@ -121,11 +122,4 @@ a.remove {
 
 .carousel img {
     width: 100%;
-}
-
-.img-responsive{
-    margin: 5%;
-}
-.galerry-img {
-    margin: auto;
 }
