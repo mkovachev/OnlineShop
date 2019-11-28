@@ -87,7 +87,7 @@ namespace OnlineShop.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseSession(); // always before app.UseEndpoints();
+            app.UseSession(); // put always before app.UseEndpoints();!
 
             app.UseEndpoints();
 

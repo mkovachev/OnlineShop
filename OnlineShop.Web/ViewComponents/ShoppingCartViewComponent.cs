@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Controllers.Models.ShoppingCartViewModels;
 using OnlineShop.Services.Interfaces;
+using OnlineShop.Services.Models.ShoppingCartService;
 using System;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Web.ViewComponents
 {
-    [ViewComponentAttribute]
-    public class ShoppingCart : ViewComponent
+    [ViewComponent(Name = "ShoppingCart")]
+    public class ShoppingCartViewComponent : ViewComponent
     {
-        private readonly Services.Models.ShoppingCartService.ShoppingCart shoppingCart;
+        private readonly ShoppingCart shoppingCart;
         private readonly IShoppingCartService shoppingCartServices;
 
-        public ShoppingCart(Services.Models.ShoppingCartService.ShoppingCart shoppingCart, IShoppingCartService shoppingCartServices)
+        public ShoppingCartViewComponent(ShoppingCart shoppingCart, IShoppingCartService shoppingCartServices)
         {
             this.shoppingCart = shoppingCart ?? throw new ArgumentNullException(nameof(shoppingCart));
             this.shoppingCartServices = shoppingCartServices ?? throw new ArgumentNullException(nameof(shoppingCartServices));
