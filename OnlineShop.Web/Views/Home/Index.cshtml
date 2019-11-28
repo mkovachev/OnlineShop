@@ -3,20 +3,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-@await Html.PartialAsync("_Carousel")
+<partial name="_Search" />
 
 <br />
 
-@await Html.PartialAsync("_Search")
+<partial name="_Carousel" />
 
 <br />
 
 <div class="row home-page">
-    @foreach (var product in Model.Products)
+    @foreach (var product in @Model.Products)
     {
         @await Html.PartialAsync("_ProductListing", product)
     }
 </div>
 
-
-@await Html.PartialAsync("_Paging")
+<partial name="_Paging" />
+@*@await Html.PartialAsync("_Paging")*@

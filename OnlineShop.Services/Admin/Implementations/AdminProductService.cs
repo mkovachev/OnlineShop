@@ -19,7 +19,7 @@ namespace OnlineShop.Services.Admin.Implementations
         private readonly IMapper mapper;
         private readonly IDateTimeProvider dateTimeProvider;
 
-        public AdminProductService(OnlineShopDbContext db, IMapper mapper, IDateTimeProvider dateTimeProvider, IAdminCategoryService adminCategoryService)
+        public AdminProductService(OnlineShopDbContext db, IMapper mapper, IDateTimeProvider dateTimeProvider)
         {
             this.db = db ?? throw new ArgumentNullException(nameof(db));
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -27,7 +27,7 @@ namespace OnlineShop.Services.Admin.Implementations
         }
 
 
-        public async Task CreateAsync(string title, string shortDescription, string longDescription, decimal price, List<Image> images, string thumbnail, int categoryId, int orderDetailId)
+        public async Task CreateAsync(string title, string shortDescription, string longDescription, decimal price, ICollection<Image> images, string thumbnail, int categoryId)
         {
             Product product = new Product
             {
@@ -38,8 +38,7 @@ namespace OnlineShop.Services.Admin.Implementations
                 Images = images,
                 Thumbnail = thumbnail,
                 CreatedOn = dateTimeProvider.UtcNow(),
-                CategoryId = categoryId,
-                OrderDetailId = orderDetailId
+                CategoryId = categoryId
             };
 
             db.Products.Add(product);
@@ -47,7 +46,7 @@ namespace OnlineShop.Services.Admin.Implementations
             await db.SaveChangesAsync();
         }
 
-        public async Task EditAsync(int id, string title, string shortDescription, string longDescription, decimal price, List<Image> images, string thumbnail, int categoryId, int orderDetailId)
+        public async Task EditAsync(int id, string title, string shortDescription, string longDescription, decimal price, ICollection<Image> images, string thumbnail, int categoryId)
         {
             Product product = await db.Products.FindAsync(id);
 
@@ -63,7 +62,6 @@ namespace OnlineShop.Services.Admin.Implementations
             product.Thumbnail = thumbnail;
             product.ModifiedOn = dateTimeProvider.UtcNow();
             product.CategoryId = categoryId;
-            product.OrderDetailId = orderDetailId;
 
             await db.SaveChangesAsync();
         }

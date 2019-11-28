@@ -40,8 +40,6 @@ namespace OnlineShop.Controllers.Implementations
                 Current = page,
                 TotalPages = (int)Math.Ceiling(this.products.TotalPages() / (double)DataConstants.PageSize)
             });
-
-            // return await Task.Run(() => View());
         }
 
         public async Task<IActionResult> Search(ProductListingViewModel model)

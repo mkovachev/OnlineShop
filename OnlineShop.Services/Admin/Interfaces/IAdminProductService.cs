@@ -14,23 +14,19 @@ namespace OnlineShop.Services.Admin.Interfaces
             string shortDescription,
             string longDescription,
             decimal price,
-            List<Image> images,
+            ICollection<Image> images,
             string thumbnail,
-            int categoryId,
-            int orderDetailId
-            );
+            int categoryId);
 
         Task EditAsync(
             int id,
             string title,
             string shortDescription,
-            string description,
+            string longDescription,
             decimal price,
-            List<Image> images,
+            ICollection<Image> images,
             string thumbnail,
-            int categoryId,
-            int orderDetailId
-            );
+            int categoryId);
 
         Task DeleteAsync(int id);
         Task<AdminProductServiceModel> FindByIdAsync(int id);
