@@ -9,7 +9,7 @@ namespace OnlineShop.Web.ViewComponents
     {
         private readonly OnlineShopDbContext db;
 
-        public Splitboard(OnlineShopDbContext db) 
+        public Splitboard(OnlineShopDbContext db)
             => this.db = db ?? throw new ArgumentNullException(nameof(db));
 
         public IViewComponentResult Invoke()

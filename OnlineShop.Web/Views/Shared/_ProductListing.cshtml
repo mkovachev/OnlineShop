@@ -3,32 +3,34 @@
     ViewData["Title"] = "All Products";
 }
 
-<div class="col-sm-4 col-lg-4 col-md-4">
-    <div class="thumbnail">
-        <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-title="@Model.Title.ToFriendlyUrl()">
-            <div class="gallery-image img-responsive" style="background-image:url(@Model.Thumbnail)"></div>
-            <!--<img src="Model.Thumbnail" class="img-responsive" />-->
-            <img src="https://picsum.photos/500/300/?random&giud=@(Guid.NewGuid())" class="img-responsive">
-        </a>
-        <div class="caption">
-            <h4 class="pull-right">@Model.Price.ToString("N")</h4>
-            <h5>
-                <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-title="@Model.Title.ToFriendlyUrl()">@Model.Title</a>
-            </h5>
-            <p>@Model.ShortDescription</p>
-        </div>
+<div class="col">
+    <div class="row">
+        <div class="thumbnail">
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-title="@Model.Title.ToFriendlyUrl()">
+                <div class="gallery-image img-responsive" style="background-image:url(@Model.Thumbnail)">
+                </div>
+                <!--<img src="Model.Thumbnail" class="img-responsive" />-->
+                <img src="https://picsum.photos/500/300/?random&giud=@(Guid.NewGuid())" class="img-responsive">
+            </a>
+            <div class="caption">
+                <h4 class="pull-right">@Model.Price.ToString("N")</h4>
+                <h5>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-title="@Model.Title.ToFriendlyUrl()">@Model.Title</a>
+                </h5>
+                <p>@Model.ShortDescription</p>
+            </div>
 
-        <div class="addToCart text-right">
-            @if (User.Identity.IsAuthenticated && User.IsInRole(ControllerConstants.AdministratorRole))
-            {
-                <a class="btn btn-warning btn-sm" asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                <a class="btn btn-danger btn-sm" asp-area="Admin" asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-            }
+            <div class="addToCart text-right">
+                @if (User.Identity.IsAuthenticated && User.IsInRole(ControllerConstants.AdministratorRole))
+                {
+                    <a class="btn btn-warning btn-sm" asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-area="Admin" asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                }
 
-            <a class="btn btn-info btn-sm" id="cartButton" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-title="@Model.Title.ToFriendlyUrl()">Details</a>
+                <a class="btn btn-info btn-sm" id="cartButton" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-title="@Model.Title.ToFriendlyUrl()">Details</a>
 
-            <a class="btn btn-success btn-sm" id="cartButton" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.Id">Add to cart</a>
+                <a class="btn btn-success btn-sm" id="cartButton" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.Id">Add to cart</a>
+            </div>
         </div>
     </div>
 </div>
-

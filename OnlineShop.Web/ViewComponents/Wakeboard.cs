@@ -9,7 +9,7 @@ namespace OnlineShop.Web.ViewComponents
     {
         private readonly OnlineShopDbContext db;
 
-        public Wakeboard(OnlineShopDbContext db) 
+        public Wakeboard(OnlineShopDbContext db)
             => this.db = db ?? throw new ArgumentNullException(nameof(db));
 
         public IViewComponentResult Invoke()
