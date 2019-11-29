@@ -27,14 +27,3 @@
         }
     </div>
 </div>
-
-@*<div class="card" style="width: 18rem;">
-        <img src="https://picsum.photos/500/300/?random&giud=@(Guid.NewGuid())" class="card-img-top card-link" alt="some pic">
-        <div class="card-body">
-            <h5 class="card-link">@Model.Title.ToFriendlyUrl()</h5>
-            <h5 class="card-subtitle">@Model.Price.ToString("N")</h5>
-            <p class="card-text">@Model.ShortDescription</p>
-            <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id" asp-route-title="@Model.Title.ToFriendlyUrl()" class="btn btn-primary">Details</a>
-            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-primary">Add to cart</a>
-        </div>
-    </div>*@
