@@ -13,6 +13,6 @@ namespace OnlineShop.Controllers.Models.ProductsViewModels
 
         public decimal Price { get; set; }
 
-        public ICollection<Image> Images { get; set; } = new List<Image>();
+        public IEnumerable<Image> Images { get; set; }
     }
 }

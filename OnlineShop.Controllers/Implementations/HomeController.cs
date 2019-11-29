@@ -42,12 +42,14 @@ namespace OnlineShop.Controllers.Implementations
             });
         }
 
-        public async Task<IActionResult> Search(ProductListingViewModel model)
-           => View(new ProductListingViewModel
-           {
-               Search = model.Search,
-               Products = await this.products.SearchAsync(model.Search)
-           });
+      public async Task<IActionResult> Search(ProductListingViewModel model)
+        {
+            return View(new ProductListingViewModel
+            {
+                Search = model.Search,
+                Products = await this.products.SearchAsync(model.Search)
+            });
+        }
 
         public async Task<IActionResult> About() => await Task.Run(() => View());
 

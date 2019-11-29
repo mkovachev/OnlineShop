@@ -14,7 +14,7 @@ namespace OnlineShop.Services.Models.ProductService
         public decimal Price { get; set; }
 
         [DataType(DataType.ImageUrl)]
-        public IEnumerable<Image> Images { get; set; } = new List<Image>();
+        public IEnumerable<Image> Images { get; set; }
 
         public int CategoryId { get; set; }
 

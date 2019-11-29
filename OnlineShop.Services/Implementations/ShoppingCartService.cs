@@ -24,7 +24,7 @@ namespace OnlineShop.Services.Implementations
         public async Task<Product> FindProductByIdAsync(int productId)
             => await this.db.Products.FirstOrDefaultAsync(s => s.Id == productId);
 
-        public List<ShoppingCartItem> AllProducts()
+        public ICollection<ShoppingCartItem> AllProducts()
             => this.shoppingCart
                        .ShoppingCartItems
                        .Where(c => c.ShoppingCartId == shoppingCart.Id)

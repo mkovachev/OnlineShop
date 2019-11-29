@@ -7,6 +7,6 @@ namespace OnlineShop.Services.Models.CategoryService
 {
     public class CategoryServiceModel : IMapFrom<Category>
     {
-        public IEnumerable<ProductListingServiceModel> Products { get; set; } = new List<ProductListingServiceModel>();
+        public IEnumerable<ProductListingServiceModel> Products { get; set; }
     }
 }

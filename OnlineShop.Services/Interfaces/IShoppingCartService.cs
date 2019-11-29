@@ -18,6 +18,6 @@ namespace OnlineShop.Services.Interfaces
 
         decimal GetTotal();
 
-        List<ShoppingCartItem> AllProducts();
+        ICollection<ShoppingCartItem> AllProducts();
     }
 }

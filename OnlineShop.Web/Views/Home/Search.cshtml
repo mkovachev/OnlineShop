@@ -5,7 +5,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-@await Html.PartialAsync("_Search");
+<partial name="_Search" />
 
 <br />
 
@@ -14,7 +14,7 @@
     <div class="row home-page">
         @foreach (var product in Model.Products)
         {
-            @await Html.PartialAsync("_ProductListing", product)
+            <partial name="_ProductListing" model="product" />
         }
     </div>
 }
@@ -26,5 +26,6 @@ else
     </div>
 }
 
+<partial name="_Paging" />
 
-@await Html.PartialAsync("_Paging")
+<partial name="_Footer" />

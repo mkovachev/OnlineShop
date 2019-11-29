@@ -11,7 +11,7 @@ namespace OnlineShop.Services.Admin.Models
 
         public string Name { get; set; }
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public IEnumerable<Product> Products { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
