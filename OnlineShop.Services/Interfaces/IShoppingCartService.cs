@@ -10,7 +10,7 @@ namespace OnlineShop.Services.Interfaces
     {
         Task<Product> FindProductByIdAsync(int productId);
 
-        void AddToCart(Product product, int amount);
+        void AddToCart(Product product, int quantity);
 
         void RemoveProduct(Product product);
 
