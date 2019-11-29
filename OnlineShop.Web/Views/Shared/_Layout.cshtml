@@ -20,12 +20,12 @@
                 <li class="nav-item active">@await Component.InvokeAsync("Ski")</li>
                 <li class="nav-item active">@await Component.InvokeAsync("Wakeboard")</li>
                 <li class="nav-item active">@await Component.InvokeAsync("Kitesurf")</li>
-                <li class="nav-item active">@await Component.InvokeAsync("ShoppingCart")</li>
                 <li class="nav-item active"><a class="nav-link" asp-controller="Brands" asp-action="Index">Brands</a></li>
                 <li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="Contact">Contact us</a></li>
                 <li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="About">About</a></li>
-                <partial name="_LoginPartial" />  <!--login/register-->
+                <li class="nav-item active">@await Component.InvokeAsync("ShoppingCart")</li>
             </ul>
+                <partial name="_LoginPartial" />  <!--login/register-->
         </div>
     </nav>
     <!--nav admin section -->
