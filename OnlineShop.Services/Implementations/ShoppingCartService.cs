@@ -45,14 +45,14 @@ namespace OnlineShop.Services.Implementations
                     Id = Guid.NewGuid().ToString(),
                     ShoppingCartId = shoppingCart.Id,
                     Product = product,
-                    Price = 1
+                    Amount = 1
                 };
 
                 this.shoppingCart.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {
-                shoppingCartItem.Price++;
+                shoppingCartItem.Amount++;
             }
             return;
         }
@@ -67,9 +67,9 @@ namespace OnlineShop.Services.Implementations
 
             if (shoppingCartItem != null)
             {
-                if (shoppingCartItem.Price > 1)
+                if (shoppingCartItem.Amount > 1)
                 {
-                    shoppingCartItem.Price--;
+                    shoppingCartItem.Amount--;
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace OnlineShop.Services.Implementations
             => this.shoppingCart
                        .ShoppingCartItems
                        .Where(c => c.ShoppingCartId == shoppingCart.Id)
-                       .Select(c => c.Product.Price * c.Price)
+                       .Select(c => c.Product.Price * c.Amount)
                        .Sum();
     }
 }

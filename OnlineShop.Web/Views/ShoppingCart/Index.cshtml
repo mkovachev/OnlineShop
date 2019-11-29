@@ -26,8 +26,8 @@
                         </a>
                     </td>
                     <td>@item.Product.Price.ToString("N")</td>
-                    <td>@((item.Price * item.Product.Price).ToString("N"))</td>
-                    <td>@item.Price</td>
+                    <td>@((item.Amount * item.Product.Price).ToString("N"))</td>
+                    <td>@item.Amount</td>
                     <td><a class="glyphicon glyphicon-remove-circle text-danger text-center" asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id"></a></td>
                 </tr>
             }

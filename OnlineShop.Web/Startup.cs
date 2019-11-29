@@ -52,6 +52,13 @@ namespace OnlineShop.Web
                    options.Password.RequireUppercase = false;
                });
 
+            // Shopping cart
+            services.AddSingleton(s => new ShoppingCart()
+            {
+                Id = Guid.NewGuid().ToString(),
+                ShoppingCartItems = new List<ShoppingCartItem>()
+            });
+
             services.AddServices(); // auto reg all services
 
             // auto req all mappings
@@ -59,8 +66,6 @@ namespace OnlineShop.Web
             services.AddAutoMapper(typeof(ITransientService).Assembly,
                                    typeof(HomeController).Assembly);
 
-            // Shopping cart
-            services.AddScoped(s => new ShoppingCart() { Id = Guid.NewGuid().ToString(), ShoppingCartItems = new List<ShoppingCartItem>() });
 
             services
                 .AddMvc(options => options.AddAutoValidateAntiforgeryToken())
