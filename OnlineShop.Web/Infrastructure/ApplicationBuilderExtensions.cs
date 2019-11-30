@@ -55,7 +55,7 @@ namespace OnlineShop.Web.Infrastructure
 
                 await db.Database.MigrateAsync();
 
-                RoleManager<IdentityRole> roleManager = services.GetService<RoleManager<IdentityRole>>();
+                var roleManager = services.GetService<RoleManager<IdentityRole>>();
 
                 //create role = "Administrator"
                 if (!await roleManager.RoleExistsAsync(ControllerConstants.AdministratorRole))
@@ -64,7 +64,7 @@ namespace OnlineShop.Web.Infrastructure
                     await roleManager.CreateAsync(adminRole);
                 }
 
-                UserManager<IdentityUser> userManager = services.GetService<UserManager<IdentityUser>>();
+                var userManager = services.GetService<UserManager<User>>();
 
                 // create admin for testing
                 if (await userManager.FindByNameAsync("admin@onlineshop.com") == null)

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Controllers.Implementations;
+using OnlineShop.Data.Models;
 using OnlineShop.Services.Common;
 using OnlineShop.Services.Models.ShoppingCartService;
 using OnlineShop.Web.Infrastructure;
@@ -37,7 +38,7 @@ namespace OnlineShop.Web
                 => options.UseSqlServer(Configuration.GetDefaultConnectionString()));
 
             services
-                .AddDefaultIdentity<IdentityUser>()
+                .AddDefaultIdentity<User>()
                 .AddRoles<IdentityRole>()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<OnlineShopDbContext>();
