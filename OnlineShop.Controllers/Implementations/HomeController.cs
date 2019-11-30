@@ -42,7 +42,7 @@ namespace OnlineShop.Controllers.Implementations
             });
         }
 
-      public async Task<IActionResult> Search(ProductListingViewModel model)
+        public async Task<IActionResult> Search(ProductListingViewModel model)
         {
             return View(new ProductListingViewModel
             {

@@ -67,11 +67,11 @@ namespace OnlineShop.Web.Infrastructure
                 UserManager<IdentityUser> userManager = services.GetService<UserManager<IdentityUser>>();
 
                 // create admin for testing
-                if (await userManager.FindByNameAsync("admin") == null)
+                if (await userManager.FindByNameAsync("admin@onlineshop.com") == null)
                 {
                     User admin = new User
                     {
-                        UserName = "admin",
+                        UserName = "admin@onlineshop.com",
                         Email = "admin@onlineshop.com"
                     };
 
@@ -80,37 +80,50 @@ namespace OnlineShop.Web.Infrastructure
                 }
 
                 // create user for testing
-                if (await userManager.FindByNameAsync("user") == null)
+                if (await userManager.FindByNameAsync("user@onlineshop.com") == null)
                 {
                     User user = new User
                     {
-                        UserName = "user",
+                        UserName = "user@onlineshop.com",
                         Email = "user@onlineshop.com"
                     };
                     await userManager.CreateAsync(user, "userpass");
                 }
 
                 // create category for testing
-                if (await db.Categories.FindAsync(11) == null)
+                var snowboard = new Category
                 {
-                    var testCategory = new Category
-                    {
-                        Name = "Snowboard"
-                    };
-
-                    await db.Categories.AddAsync(testCategory);
+                    Name = "Snowboard"
+                };
+                if (await db.Categories.FirstOrDefaultAsync(
+                    c => c.Name == snowboard.Name) == null)
+                {
+                    await db.Categories.AddAsync(snowboard);
+                    await db.SaveChangesAsync();
                 }
 
-                //create product for testing
-                if (await db.Products.FindAsync(15) == null)
+                // create product for testing
+                if (await db.Products.CountAsync() == 0)
                 {
                     var testProduct = new Product
                     {
-                        CategoryId = 11,
-                        Title = "TestProduct"
+                        CategoryId = snowboard.Id,
+                        Title = "Sensei"
                     };
 
-                    await db.Products.AddAsync(testProduct);
+                    var testProduct2 = new Product
+                    {
+                        CategoryId = snowboard.Id,
+                        Title = "Slash"
+                    };
+
+                    var testProduct3 = new Product
+                    {
+                        CategoryId = snowboard.Id,
+                        Title = "Luna"
+                    };
+
+                    await db.Products.AddRangeAsync(testProduct, testProduct2, testProduct3);
                 }
 
                 await db.SaveChangesAsync();
