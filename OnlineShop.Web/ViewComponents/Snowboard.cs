@@ -1,8 +1,6 @@
 ﻿using Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShop.Web.ViewComponents
 {
@@ -12,10 +10,15 @@ namespace OnlineShop.Web.ViewComponents
 
         public Snowboard(OnlineShopDbContext db) => this.db = db;
 
-        public async Task<IViewComponentResult> InvokeAsync()
-            => View(await this.db.Categories
-                                   .Where(c => c.Name.Contains("Snowboard"))
-                                   .OrderBy(c => c.Name)
-                                   .ToListAsync());
+        public IViewComponentResult Invoke()
+         => View(this.db.Categories
+                    .Where(c => c.Name.Contains("Snowboard"))
+                    .OrderBy(c => c.Name));
+
+        //public async Task<IViewComponentResult> InvokeAsync()
+        //    => View(await this.db.Categories
+        //                           .Where(c => c.Name.Contains("Snowboard"))
+        //                           .OrderBy(c => c.Name)
+        //                           .ToListAsync());
     }
 }
