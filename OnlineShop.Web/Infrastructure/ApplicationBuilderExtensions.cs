@@ -57,11 +57,17 @@ namespace OnlineShop.Web.Infrastructure
 
                 var roleManager = services.GetService<RoleManager<IdentityRole>>();
 
-                //create role = "Administrator"
+                // create role = "Administrator"
                 if (!await roleManager.RoleExistsAsync(ControllerConstants.AdministratorRole))
                 {
                     IdentityRole adminRole = new IdentityRole(ControllerConstants.AdministratorRole);
                     await roleManager.CreateAsync(adminRole);
+                }
+                //create role = "Moderator"
+                if (!await roleManager.RoleExistsAsync(ControllerConstants.ModeratorRole))
+                {
+                    IdentityRole moderatorRole = new IdentityRole(ControllerConstants.ModeratorRole);
+                    await roleManager.CreateAsync(moderatorRole);
                 }
 
                 var userManager = services.GetService<UserManager<User>>();
@@ -77,6 +83,7 @@ namespace OnlineShop.Web.Infrastructure
 
                     await userManager.CreateAsync(admin, "adminpass");
                     await userManager.AddToRoleAsync(admin, ControllerConstants.AdministratorRole);
+                    await userManager.AddToRoleAsync(admin, ControllerConstants.ModeratorRole);
                 }
 
                 // create user for testing
@@ -88,6 +95,7 @@ namespace OnlineShop.Web.Infrastructure
                         Email = "user@onlineshop.com"
                     };
                     await userManager.CreateAsync(user, "userpass");
+                    await userManager.AddToRoleAsync(user, ControllerConstants.ModeratorRole);
                 }
 
                 // create category for testing
