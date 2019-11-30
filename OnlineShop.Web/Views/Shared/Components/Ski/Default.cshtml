@@ -1,4 +1,10 @@
-﻿<li class="dropdown">
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Ski";
+}
+
+<li class="dropdown">
     <a asp-controller="Categories" asp-action="Index" class="dropdown-toggle" data-toggle="dropdown">
         Ski<b class="caret"></b>
     </a>
@@ -6,9 +12,8 @@
         @foreach (var category in Model)
         {
             <li>
-                <a asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@category.Id">@category.Name</a>
+                <a asp-area="" asp-controller="Categories" asp-action="Index" asp-route-id="@category.Id">@category.Name</a>
             </li>
         }
     </ul>
 </li>
-

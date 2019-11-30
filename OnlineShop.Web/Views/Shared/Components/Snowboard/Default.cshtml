@@ -1,4 +1,10 @@
-﻿<li class="dropdown">
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Snowboard";
+}
+
+<li class="dropdown">
     <a asp-controller="Categories" asp-action="Index" class="dropdown-toggle" data-toggle="dropdown">
         Snowboard<b class="caret"></b>
     </a>
@@ -11,3 +17,16 @@
         }
     </ul>
 </li>
+
+<div class="dropdown">
+    <a class="btn btn-light btn-sm dropdown-toggle" asp-controller="Categories" asp-action="Index" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Snowboard
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        @foreach (var category in Model)
+        {
+            <a asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@category.Id">@category.Name</a>
+        }
+    </div>
+</div>

@@ -6,7 +6,7 @@
         @foreach (var category in Model)
         {
             <li>
-                <a asp-controller="Category" asp-action="Index" asp-route-id="@category.Id">@category.Name</a> <!--asp-route-title="category.Name.ToFriendlyUrl()" not wwroking-->
+                <a asp-controller="Category" asp-action="Index" asp-route-id="@category.Id">@category.Name</a> <!--asp-route-title="category.Name.ToFriendlyUrl()" not working-->
             </li>
         }
     </ul>
