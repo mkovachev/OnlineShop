@@ -17,10 +17,9 @@
     @foreach (var product in @Model.Products)
     {
         <partial name="_ProductListing" model="product" />
-        //@await Html.PartialAsync("_ProductListing", product)
     }
 </div>
 
-<partial name="_Paging" />
+<partial name="_Pagination" />
 
 <partial name="_Footer" />

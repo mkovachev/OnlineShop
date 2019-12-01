@@ -3,13 +3,9 @@
     ViewData["Title"] = "All Products in category";
 }
 
-<div class="row glyphicon-search">
-    <form asp-action="Search">
-        <div class="col-md-4 pull-right">
-            <input class="form-control" placeholder="Search..." />
-        </div>
-    </form>
-</div>
+<partial name="_Search" />
+
+<br/>
 
 
 <div class="row home-page">

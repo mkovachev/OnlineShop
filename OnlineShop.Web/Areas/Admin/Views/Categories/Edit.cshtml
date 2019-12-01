@@ -7,11 +7,11 @@
 
 <div class="row edit-product">
     <div class="col-md-4">
-        @await Html.PartialAsync("_CreateOrEditForm", Model)
+        <partial name="_CreateOrEditForm" model="Model" />
     </div>
 </div>
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <partial name="_ValidationScriptsPartial" />
 }
 

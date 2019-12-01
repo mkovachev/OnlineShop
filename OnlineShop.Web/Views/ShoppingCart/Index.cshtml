@@ -12,7 +12,7 @@
                 <th>Product</th>
                 <th>Price</th>
                 <th>Subtotal</th>
-                <th>Amount</th>
+                <th>Quantity</th>
                 <th>Remove</th>
             </tr>
         </thead>
@@ -28,7 +28,11 @@
                     <td>@item.Product.Price.ToString("N")</td>
                     <td>@((item.Quantity * item.Product.Price).ToString("N"))</td>
                     <td>@item.Quantity</td>
-                    <td><a class="glyphicon glyphicon-remove-circle text-danger text-center" asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id"></a></td>
+                    <td>
+                        <a class="text-danger text-center" asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id">
+                            <i class="far fa-trash-alt" type="submit"></i>
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>

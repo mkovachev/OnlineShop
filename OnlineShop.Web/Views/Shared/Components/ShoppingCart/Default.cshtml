@@ -7,10 +7,10 @@
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
 <li>
-    <a asp-controller="ShoppingCart" class="btn btn-primary btn-sm">
-        <span class="glyphicon glyphicon-shopping-cart">Shopping Cart</span>
+    <a asp-controller="ShoppingCart" class="btn btn-outline-info my-2 my-sm-0">
+        <i class="fas fa-shopping-cart"></i>
         <span id="cart-status">
-            @if(@Model.ShoppingCart.ShoppingCartItems.Count != 0)
+            @if (@Model.ShoppingCart.ShoppingCartItems.Count != 0)
             {
                 @Model.ShoppingCart.ShoppingCartItems.Count
             }
