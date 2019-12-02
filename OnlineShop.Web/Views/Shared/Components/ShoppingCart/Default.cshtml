@@ -6,8 +6,8 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
-<li>
-    <a class="btn-light" asp-controller="ShoppingCart" asp-action="Index">
+<li class="nav-item">
+    <a asp-controller="ShoppingCart" asp-action="Index">
         <i class="fas fa-shopping-cart"></i>
         <span id="cart-status">
             @if (@Model.ShoppingCart.ShoppingCartItems.Count != 0)

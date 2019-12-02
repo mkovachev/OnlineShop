@@ -29,8 +29,8 @@
                     <td>@((item.Quantity * item.Product.Price).ToString("N"))</td>
                     <td>@item.Quantity</td>
                     <td>
-                        <a class="text-danger text-center" asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id">
-                            <i class="far fa-trash-alt" type="submit"></i>
+                        <a asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id">
+                            <i class="far fa-trash-alt"></i>
                         </a>
                     </td>
                 </tr>
@@ -38,13 +38,13 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-right">Total:</td>
+                <td colspan="3" class="float-sm-none">Total:</td>
                 <td>@Model.ShoppingCartTotal.ToString("N")</td>
             </tr>
         </tfoot>
     </table>
 
-    <div class="text-right">
+    <div class="float-sm-none">
         <div class="row">
             <a class="btn btn-success btn-sm" id="cartButton" asp-controller="Order" asp-action="Checkout">Checkout</a>
             <a class="btn btn-info btn-sm" id="cartButton" asp-controller="Home" asp-action="Index">Continue Shopping</a>

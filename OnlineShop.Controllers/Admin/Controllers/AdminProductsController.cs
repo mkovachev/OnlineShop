@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShop.Controllers.Admin.Controllers.Abstract;
-using OnlineShop.Controllers.Admin.Models.ProductAdminViewModels;
+using OnlineShop.Controllers.Admin.Models.AdminProductViewModels;
 using OnlineShop.Controllers.Infrastructure;
 using OnlineShop.Services.Admin.Interfaces;
 using System;

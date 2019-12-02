@@ -9,22 +9,22 @@
     <link href="~/lib/font-awesome/css/all.css" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm bg-white">
         <a class="navbar-brand" href="/">OnlineShop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item active">@await Component.InvokeAsync("Snowboard")</li>
+                <li class="nav-item">@await Component.InvokeAsync("Snowboard")</li>
                 <li class="nav-item">@await Component.InvokeAsync("Splitboard")</li>
                 <li class="nav-item">@await Component.InvokeAsync("Ski")</li>
                 <li class="nav-item">@await Component.InvokeAsync("Wakeboard")</li>
                 <li class="nav-item">@await Component.InvokeAsync("Kitesurf")</li>
                 <li class="nav-item">@await Component.InvokeAsync("ShoppingCart")</li>
-                <li class="nav-item"><a class="nav-link btn-light" asp-controller="Brands" asp-action="Index">Brands</a></li>
-                <li class="nav-item"><a class="nav-link btn-light" asp-controller="Home" asp-action="Contact">Contact us</a></li>
-                <li class="nav-item"><a class="nav-link btn-light" asp-controller="Home" asp-action="About">About</a></li>
+                <li class="nav-item"><a asp-controller="Brands" asp-action="Index">Brands</a></li>
+                <li class="nav-item"><a asp-controller="Home" asp-action="Contact">Contact us</a></li>
+                <li class="nav-item"><a asp-controller="Home" asp-action="About">About</a></li>
                 <partial name="_LoginPartial" />  <!--login/register-->
             </ul>
         </div>
@@ -32,16 +32,16 @@
     <!--nav admin section -->
     @if (User.Identity.IsAuthenticated && User.IsInRole(ControllerConstants.AdministratorRole))
     {
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Admin Panel</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-sm bg-white">
+            <a class="navbar-brand" href="/">Admin</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Categories" asp-action="Create">Create Category</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Create">Create Product</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a></li>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AdminCategories" asp-action="Create">Create Category</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AdminProducts" asp-action="Create">Create Product</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Users</a></li>
                 </ul>
             </div>
         </nav>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Controllers.Admin.Controllers.Abstract;
-using OnlineShop.Controllers.Admin.Models.UserAdminViewModels;
+using OnlineShop.Controllers.Admin.Models.AdminUserViewModels;
 using OnlineShop.Controllers.Infrastructure;
 using OnlineShop.Data.Models;
 using OnlineShop.Services.Admin.Interfaces;
