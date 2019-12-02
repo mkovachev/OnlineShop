@@ -57,7 +57,7 @@ namespace OnlineShop.Services.Implementations
             return;
         }
 
-        public void RemoveProduct(Product product)
+        public void RemoveFromCart(Product product)
         {
             var shoppingCartItem = this.shoppingCart
                                         .ShoppingCartItems

@@ -12,7 +12,7 @@ namespace OnlineShop.Services.Interfaces
 
         void AddToCart(Product product, int quantity);
 
-        void RemoveProduct(Product product);
+        void RemoveFromCart(Product product);
 
         void ClearCart();
 

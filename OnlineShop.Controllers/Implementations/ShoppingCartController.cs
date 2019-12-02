@@ -50,7 +50,7 @@ namespace OnlineShop.Controllers.Implementations
                 return NotFound();
             }
 
-            this.shoppingCartServices.RemoveProduct(shoppingCartItem);
+            this.shoppingCartServices.RemoveFromCart(shoppingCartItem);
 
             TempData.Add(ControllerConstants.SuccessMessage, $"{shoppingCartItem.Title} amount updated successfully");
 
