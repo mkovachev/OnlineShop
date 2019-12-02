@@ -1,23 +1,11 @@
-﻿
-
-/*--------------------------------------- Custom----------------------------------------*/
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 200px;
-}
-
-li a {
+﻿li a {
     text-align: center;
     display: block;
-    color: #000;
+    color: blue;
     padding: 8px 16px;
-    text-decoration: none;
 }
 
-li a:hover {
-    background-color: #555;
-    color: white;
-}
+    li a:hover {
+        background-color: lightcoral;
+        color: white;
+    }

@@ -38,13 +38,13 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="float-sm-none">Total:</td>
+                <td colspan="3">Total:</td>
                 <td>@Model.ShoppingCartTotal.ToString("N")</td>
             </tr>
         </tfoot>
     </table>
 
-    <div class="float-sm-none">
+    <div>
         <div class="row">
             <a class="btn btn-success btn-sm" id="cartButton" asp-controller="Order" asp-action="Checkout">Checkout</a>
             <a class="btn btn-info btn-sm" id="cartButton" asp-controller="Home" asp-action="Index">Continue Shopping</a>
