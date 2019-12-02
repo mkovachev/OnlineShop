@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShop.Controllers.Admin.Models.UserAdminViewModels
+namespace OnlineShop.Controllers.Admin.Models.AdminUserViewModels
 {
     public class AddUserToRoleViewModel
     {

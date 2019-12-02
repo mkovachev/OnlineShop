@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Controllers.Admin.Controllers.Abstract;
-using OnlineShop.Controllers.Admin.Models.CategoryAdminViewModels;
+using OnlineShop.Controllers.Admin.Models.AdminCategoryViewModels;
 using OnlineShop.Controllers.Infrastructure;
 using OnlineShop.Services.Admin.Interfaces;
 using OnlineShop.Services.Admin.Models;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Controllers.Admin.Controllers
 {
-    public class CategoriesController : AdminController
+    public class AdminCategoriesController : AdminController
     {
         private readonly IAdminCategoryService categories;
 
-        public CategoriesController(IAdminCategoryService categories)
+        public AdminCategoriesController(IAdminCategoryService categories)
         {
             this.categories = categories ?? throw new ArgumentNullException(nameof(categories));
         }

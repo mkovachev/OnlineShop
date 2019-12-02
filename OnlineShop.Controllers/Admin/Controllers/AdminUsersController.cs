@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Controllers.Admin.Controllers
 {
-    public class UsersController : AdminController
+    public class AdminUsersController : AdminController
     {
         private readonly IAdminUserService users;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<User> userManager;
 
-        public UsersController(IAdminUserService users, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public AdminUsersController(IAdminUserService users, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             this.users = users;
             this.roleManager = roleManager;

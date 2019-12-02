@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Controllers.Admin.Controllers
 {
-    public class ProductsController : AdminController
+    public class AdminProductsController : AdminController
     {
         private readonly IAdminProductService products;
         private readonly IAdminCategoryService categories;
 
-        public ProductsController(IAdminProductService products, IAdminCategoryService categories)
+        public AdminProductsController(IAdminProductService products, IAdminCategoryService categories)
         {
             this.products = products;
             this.categories = categories;

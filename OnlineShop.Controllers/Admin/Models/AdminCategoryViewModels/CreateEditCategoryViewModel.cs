@@ -1,7 +1,7 @@
 ﻿using OnlineShop.Data;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShop.Controllers.Admin.Models.CategoryAdminViewModels
+namespace OnlineShop.Controllers.Admin.Models.AdminCategoryViewModels
 {
     public class CreateEditCategoryViewModel
     {
