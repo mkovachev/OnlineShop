@@ -11,7 +11,7 @@
       "destination": "wwwroot/lib/jquery/"
     },
     {
-      "library": "popper.js@1.15.0",
+      "library": "popper.js@1.16.0",
       "destination": "wwwroot/lib/popper.js/"
     },
     {

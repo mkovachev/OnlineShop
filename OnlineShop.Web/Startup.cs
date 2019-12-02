@@ -70,7 +70,8 @@ namespace OnlineShop.Web
 
             services
                 .AddMvc(options => options.AddAutoValidateAntiforgeryToken())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddSessionStateTempDataProvider(); // add TempData
 
             services.AddRouting(routing => { routing.LowercaseUrls = true; });
 

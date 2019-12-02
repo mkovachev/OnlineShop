@@ -6,14 +6,12 @@
 @if (Model.Count() != 0)
 {
     <li class="dropdown">
-        <a asp-controller="Categories" asp-action="Index" class="dropdown-toggle btn-light" data-toggle="dropdown">
-            Splitboard
-        </a>
+        <a asp-controller="Categories" asp-action="Index" data-toggle="dropdown">Splitboard</a>
         <ul class="dropdown-menu">
             @foreach (var category in Model)
             {
                 <li>
-                    <a class="btn-light" asp-controller="Category" asp-action="Index" asp-route-id="@category.Id">@category.Name.ToFriendlyUrl()</a>
+                    <a class="btn-light" asp-controller="Categories" asp-action="Index" asp-route-id="@category.Id">@category.Name.ToFriendlyUrl()</a>
                 </li>
             }
         </ul>
