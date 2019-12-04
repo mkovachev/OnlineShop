@@ -3,17 +3,6 @@
 @{
     ViewData["Title"] = "Splitboard";
 }
-@if (Model.Count() != 0)
-{
-    <li class="dropdown">
-        <a asp-controller="Categories" asp-action="Index" data-toggle="dropdown">Splitboard</a>
-        <ul class="dropdown-menu">
-            @foreach (var category in Model)
-            {
-                <li>
-                    <a class="btn-light" asp-controller="Categories" asp-action="Index" asp-route-id="@category.Id">@category.Name.ToFriendlyUrl()</a>
-                </li>
-            }
-        </ul>
-    </li>
-}
+
+
+<partial name="_CategoryComponent" />
