@@ -37,7 +37,7 @@ namespace OnlineShop.Services.Implementations
 
         public async Task<IEnumerable<ProductListingServiceModel>> SearchAsync(string search)
         {
-            search ??= string.Empty; // TODO
+            search ??= string.Empty;
 
             return await this.db
                         .Products
