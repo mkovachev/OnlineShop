@@ -1,7 +1,9 @@
 ﻿using Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShop.Web.ViewComponents
 {
@@ -12,9 +14,10 @@ namespace OnlineShop.Web.ViewComponents
         public Wakeboard(OnlineShopDbContext db)
             => this.db = db ?? throw new ArgumentNullException(nameof(db));
 
-        public IViewComponentResult Invoke()
-         => View(this.db.Categories
-                    .Where(c => c.Name.Contains("Wakeboard"))
-                    .OrderBy(c => c.Name));
+        public async Task<IViewComponentResult> InvokeAsync()
+          => View(await this.db.Categories
+                                 .Where(c => c.Name.Contains("Wakeboard"))
+                                 .OrderBy(c => c.Name)
+                                 .ToListAsync());
     }
 }
