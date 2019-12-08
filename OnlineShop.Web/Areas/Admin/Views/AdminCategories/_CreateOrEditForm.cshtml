@@ -3,6 +3,12 @@
     ViewData["Title"] = "Create Or Edit Category";
 }
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <h2 class="text-success">@TempData["SuccessMessage"]</h2>
+}
+
+
 <div class="row">
     <form method="post">
         <div class="form-group">

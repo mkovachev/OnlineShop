@@ -22,20 +22,20 @@ namespace OnlineShop.Services.Implementations
         }
 
         public async Task<Product> FindProductByIdAsync(int productId)
-            => await this.db.Products.FirstOrDefaultAsync(s => s.Id == productId);
+            => await this.db.Products.FirstOrDefaultAsync(p => p.Id == productId);
 
         public ICollection<ShoppingCartItem> AllProducts()
             => this.shoppingCart
                        .ShoppingCartItems
-                       .Where(c => c.ShoppingCartId == shoppingCart.Id)
+                       .Where(i => i.ShoppingCartId == shoppingCart.Id)
                        .ToList();
 
         public void AddToCart(Product product, int amount)
         {
             var shoppingCartItem = this.shoppingCart
                                         .ShoppingCartItems
-                                        .Where(c => c.ShoppingCartId == shoppingCart.Id
-                                                        && c.Product.Id == product.Id)
+                                        .Where(i => i.ShoppingCartId == shoppingCart.Id
+                                                        && i.Product.Id == product.Id)
                                         .FirstOrDefault();
 
             if (shoppingCartItem == null)
@@ -61,8 +61,8 @@ namespace OnlineShop.Services.Implementations
         {
             var shoppingCartItem = this.shoppingCart
                                         .ShoppingCartItems
-                                        .Where(s => s.Product.Id == product.Id
-                                                   && s.ShoppingCartId == shoppingCart.Id)
+                                        .Where(i => i.Product.Id == product.Id
+                                                   && i.ShoppingCartId == shoppingCart.Id)
                                          .FirstOrDefault();
 
             if (shoppingCartItem != null)
@@ -86,8 +86,8 @@ namespace OnlineShop.Services.Implementations
         public decimal GetTotal()
             => this.shoppingCart
                        .ShoppingCartItems
-                       .Where(c => c.ShoppingCartId == shoppingCart.Id)
-                       .Select(c => c.Product.Price * c.Quantity)
+                       .Where(i => i.ShoppingCartId == shoppingCart.Id)
+                       .Select(i => i.Product.Price * c.Quantity)
                        .Sum();
     }
 }

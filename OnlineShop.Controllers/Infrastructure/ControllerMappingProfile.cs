@@ -11,7 +11,7 @@ namespace OnlineShop.Controllers.Infrastructure
         {
 
             this.CreateMap<ProductListingServiceModel, CategoryViewModel>();
-                 CreateMap<ProductListingServiceModel, ProductListingViewModel>();
+            CreateMap<ProductListingServiceModel, ProductListingViewModel>();
         }
 
     }
