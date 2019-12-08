@@ -87,7 +87,7 @@ namespace OnlineShop.Services.Implementations
             => this.shoppingCart
                        .ShoppingCartItems
                        .Where(i => i.ShoppingCartId == shoppingCart.Id)
-                       .Select(i => i.Product.Price * c.Quantity)
+                       .Select(i => i.Product.Price * i.Quantity)
                        .Sum();
     }
 }
