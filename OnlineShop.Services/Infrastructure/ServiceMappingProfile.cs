@@ -10,8 +10,7 @@ namespace OnlineShop.Services.Infrastructure
     {
         public ServiceMappingProfile()
         {
-            this.
-                CreateMap<Product, ProductListingServiceModel>();
+            CreateMap<Product, ProductListingServiceModel>();
             CreateMap<Product, ProductDetailsServiceModel>();
 
             CreateMap<Category, CategoryServiceModel>();
