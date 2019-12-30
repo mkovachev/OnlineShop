@@ -11,7 +11,7 @@ using System.Text;
 
 namespace OnlineShop.Test
 {
-    public static class Startup
+    public static class TestStartup
     {
         public static Mapper CreateMapper()
         {
