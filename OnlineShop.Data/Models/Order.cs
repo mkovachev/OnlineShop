@@ -15,6 +15,7 @@ namespace OnlineShop.Data.Models
         public string UserId { get; set; }
 
         public User User { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
