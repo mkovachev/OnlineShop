@@ -26,7 +26,7 @@ namespace OnlineShop.Services.Implementations
 
             foreach (var product in shoppingCartItems)
             {
-                var orderDetail = new OrderDetail
+                var orderDetail = new OrderDetail // TODO
                 {
                     //Amount = product.Amount,
                     //ProductId = product.Product.Id,
