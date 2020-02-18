@@ -41,7 +41,7 @@ namespace OnlineShop.Services.Admin.Implementations
                 CategoryId = categoryId
             };
 
-            db.Products.Add(product);
+            await db.Products.AddAsync(product);
 
             await db.SaveChangesAsync();
         }
@@ -62,8 +62,6 @@ namespace OnlineShop.Services.Admin.Implementations
             product.Thumbnail = thumbnail;
             product.ModifiedOn = dateTimeProvider.UtcNow();
             product.CategoryId = categoryId;
-
-            await db.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
