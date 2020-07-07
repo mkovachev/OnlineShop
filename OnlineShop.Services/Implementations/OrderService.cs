@@ -33,7 +33,7 @@ namespace OnlineShop.Services.Implementations
                     //Price = product.Product.Price,
                     OrderId = order.Id,
                     OrderPlaced = DateTime.UtcNow
-            };
+                };
 
                 await this.db.OrderDetails.AddAsync(orderDetail);
 
